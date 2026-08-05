@@ -11,7 +11,7 @@ body {
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.15s ease;
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal.reveal-in {
@@ -56,4 +56,10 @@ body {
 
 ::selection {
   background: rgba(79, 110, 247, 0.2);
+}
+
+/* ===== 无障碍：用户偏好减少动效时降级 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .metric-in, .mock-float { animation: none; }
+  .reveal { opacity: 1; transform: none; }
 }

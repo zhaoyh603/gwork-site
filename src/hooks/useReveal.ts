@@ -11,6 +11,7 @@ export function useReveal<T extends HTMLElement>() {
     const root = ref.current;
     if (!root) return;
     const targets = root.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length === 0) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

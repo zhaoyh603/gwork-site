@@ -79,7 +79,7 @@ export default function Home() {
               <div key={label} className="text-center">
                 <p
                   className="metric-in text-3xl font-semibold text-brand"
-                  style={{ animationDelay: `${i * 100}ms` } as CSSProperties}
+                  style={{ animationDelay: `${i * 100}ms` }}
                 >
                   {num}
                 </p>
@@ -98,16 +98,12 @@ export default function Home() {
             title="一个助手，承包办公日常"
             desc="从公文写作到知识库问答，从单打独斗到多助手协同，都能帮上忙。"
           />
-          <div className="reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f, i) => (
               <div
                 key={f.no}
                 style={{ '--reveal-delay': `${(i % 3) * 90}ms` } as CSSProperties}
-                className={
-                  f.no === '07'
-                    ? 'reveal rounded-lg border border-line bg-paper p-6 sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-6'
-                    : 'reveal rounded-lg border border-line bg-paper p-6 transition-shadow hover:shadow-md'
-                }
+                className={`reveal rounded-lg border border-line bg-paper p-6 ${f.no === '07' ? 'sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-6' : 'transition-shadow hover:shadow-md'}`}
               >
                 <p className="text-sm font-semibold text-brand">{f.no}</p>
                 <h3 className="mt-2 text-lg font-semibold text-brand-dark">{f.title}</h3>
