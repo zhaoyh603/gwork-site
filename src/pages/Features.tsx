@@ -4,7 +4,7 @@ import CtaButton from '../components/CtaButton';
 import ScreenMock from '../components/ScreenMock';
 import { FEATURES } from '../data/features';
 
-/** 每节配图变体：公文→secretary，知识库→kb，其余→workspace */
+/** 每节配图变体：公文→secretary，知识库→kb，其余→workspace（03 数据安全配 kb 检索画面语义错配，用中性工作区画面；未映射时 ?? 'workspace' 兜底） */
 const MOCK_BY_NO: Record<string, 'workspace' | 'secretary' | 'kb'> = {
   '01': 'secretary',
   '02': 'workspace',
@@ -37,7 +37,7 @@ export default function Features() {
               </p>
             </div>
             <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
-              <ScreenMock variant={MOCK_BY_NO[f.no]} />
+              <ScreenMock variant={MOCK_BY_NO[f.no] ?? 'workspace'} />
             </div>
           </section>
         ))}
