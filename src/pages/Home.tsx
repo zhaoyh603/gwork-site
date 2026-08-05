@@ -66,7 +66,7 @@ export default function Home() {
                 key={f.no}
                 className={
                   f.no === '07'
-                    ? 'rounded-lg border border-line bg-paper p-6 lg:col-span-3 lg:flex lg:items-center lg:gap-6'
+                    ? 'rounded-lg border border-line bg-paper p-6 sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-6'
                     : 'rounded-lg border border-line bg-paper p-6 transition-shadow hover:shadow-md'
                 }
               >
@@ -112,10 +112,9 @@ export default function Home() {
           />
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-lg border border-line bg-brand-soft p-8">
-              <h3 className="text-lg font-semibold text-brand-dark">本地存储，不经过第三方云端</h3>
+              <h3 className="text-lg font-semibold text-brand-dark">数据存储在本机</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink">
-                对话记录、知识库、工作区数据全部存在本机，不依赖外部服务器，
-                断网也能继续干活。
+                对话记录、知识库、工作区数据全部存在本机；模型可自由选择云端或内网部署，按需满足安全要求。
               </p>
             </div>
             <div className="rounded-lg border border-line bg-brand-soft p-8">

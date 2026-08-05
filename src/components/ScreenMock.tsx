@@ -24,9 +24,9 @@ export default function ScreenMock({ variant = 'workspace' }: { variant?: MockVa
     <div className="overflow-hidden rounded-lg border border-line shadow-md">
       {/* 窗口栏 */}
       <div className="flex items-center gap-2 border-b border-line bg-paper px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-line" />
+        <span className="h-2.5 w-2.5 rounded-full bg-line" />
+        <span className="h-2.5 w-2.5 rounded-full bg-line" />
         <span className="ml-3 text-xs text-ink-soft">Gwork 工作台</span>
       </div>
       {/* tab 栏 */}
