@@ -11,8 +11,8 @@ function DownloadButton({ os, desc }: { os: string; desc: string }) {
       aria-disabled={!ready}
       className={
         ready
-          ? 'flex items-center justify-center gap-3 rounded-md bg-brand px-8 py-5 text-white shadow-sm transition-colors hover:bg-brand-hover'
-          : 'flex cursor-not-allowed items-center justify-center gap-3 rounded-md border border-line bg-paper px-8 py-5 text-ink-soft'
+          ? 'flex items-center justify-center rounded-md bg-brand px-8 py-5 text-white shadow-sm transition-colors hover:bg-brand-hover'
+          : 'flex cursor-not-allowed items-center justify-center rounded-md border border-line bg-paper px-8 py-5 text-ink-soft'
       }
     >
       <div className="text-left">
