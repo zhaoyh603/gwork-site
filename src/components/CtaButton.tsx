@@ -17,7 +17,7 @@ export default function CtaButton({
   return (
     <a
       href={href}
-      className={`inline-block rounded-md bg-brand font-medium text-white shadow-sm transition-colors hover:bg-brand-hover ${sizes[size]}`}
+      className={`inline-block rounded-md bg-brand font-medium text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-md active:translate-y-0 active:shadow-sm ${sizes[size]}`}
     >
       {children}
     </a>

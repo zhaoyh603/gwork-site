@@ -6,3 +6,54 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   @apply bg-white text-ink;
 }
+
+/* ===== 滚动显现（配合 useReveal） ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Hero 加载渐入 ===== */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-rise {
+  animation: hero-rise 0.7s ease both;
+}
+
+/* ===== ScreenMock 悬浮 ===== */
+@keyframes mock-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.mock-float {
+  animation: mock-float 6s ease-in-out infinite;
+}
+
+/* ===== 数据指标数字渐入 ===== */
+@keyframes metric-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.metric-in {
+  animation: metric-in 0.5s ease both;
+}
+
+/* ===== Hero 背景氛围：浅蓝渐变 + 径向光晕 ===== */
+.hero-bg {
+  background:
+    radial-gradient(60% 80% at 85% 20%, rgba(79, 110, 247, 0.08), transparent 60%),
+    radial-gradient(50% 70% at 10% 90%, rgba(79, 110, 247, 0.05), transparent 60%),
+    linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+::selection {
+  background: rgba(79, 110, 247, 0.2);
+}

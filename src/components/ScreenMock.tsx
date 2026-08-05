@@ -21,7 +21,7 @@ const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: n
 export default function ScreenMock({ variant = 'workspace' }: { variant?: MockVariant }) {
   const v = VARIANTS[variant];
   return (
-    <div className="overflow-hidden rounded-lg border border-line shadow-md">
+    <div className="mock-float overflow-hidden rounded-lg border border-line shadow-md transition-shadow hover:shadow-xl">
       {/* 窗口栏 */}
       <div className="flex items-center gap-2 border-b border-line bg-paper px-4 py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-line" />
