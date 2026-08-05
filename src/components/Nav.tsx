@@ -3,7 +3,7 @@ import CtaButton from './CtaButton';
 
 export type NavActive = 'home' | 'features' | 'download';
 
-const LINKS: Array<{ key: NavActive; label: string; href: string }> = [
+const LINKS: Array<{ key: Exclude<NavActive, 'home'>; label: string; href: string }> = [
   { key: 'features', label: '功能', href: './features.html' },
   { key: 'download', label: '下载', href: './download.html' },
 ];
@@ -21,6 +21,7 @@ export default function Nav({ active }: { active: NavActive }) {
             <a
               key={link.key}
               href={link.href}
+              aria-current={active === link.key ? 'page' : undefined}
               className={
                 active === link.key
                   ? 'font-medium text-brand'
@@ -30,12 +31,11 @@ export default function Nav({ active }: { active: NavActive }) {
               {link.label}
             </a>
           ))}
-          <a
-            href={SITE.docsUrl || './download.html'}
-            className="text-ink-soft transition-colors hover:text-brand-dark"
-          >
-            文档
-          </a>
+          {SITE.docsUrl ? (
+            <a href={SITE.docsUrl} className="text-ink-soft transition-colors hover:text-brand-dark">
+              文档
+            </a>
+          ) : null}
           <CtaButton href="./download.html" size="sm">
             下载 Gwork
           </CtaButton>
