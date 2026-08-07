@@ -152,12 +152,12 @@ export default function Home() {
             title="一个助手，承包办公日常"
             desc="从公文写作到知识库问答，从单打独斗到多助手协同，都能帮上忙。"
           />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
             {FEATURES.map((f, i) => (
               <div
                 key={f.no}
                 style={{ '--reveal-delay': `${(i % 3) * 90}ms` } as CSSProperties}
-                className={`reveal feature-card ${f.no === '07' ? 'sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-6' : ''}`}
+                className={`reveal feature-card ${i >= 6 ? 'lg:col-span-3' : 'lg:col-span-2'}`}
               >
                 <p className="text-sm font-semibold text-brand">{f.no}</p>
                 <h3 className="mt-2 text-lg font-semibold text-brand-dark">{f.title}</h3>
