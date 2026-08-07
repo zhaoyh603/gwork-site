@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # lockfile 的 tarball URL 绑定本地 npmmirror 镜像（~/.npmrc），CI 需对齐 registry
+    env:
+      NPM_CONFIG_REGISTRY: https://registry.npmmirror.com
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
