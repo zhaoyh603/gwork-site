@@ -152,18 +152,21 @@ export default function Home() {
             title="一个助手，承包办公日常"
             desc="从公文写作到知识库问答，从单打独斗到多助手协同，都能帮上忙。"
           />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
-            {FEATURES.map((f, i) => (
-              <div
-                key={f.no}
-                style={{ '--reveal-delay': `${(i % 3) * 90}ms` } as CSSProperties}
-                className={`reveal feature-card ${i >= 6 ? 'lg:col-span-3' : 'lg:col-span-2'}`}
-              >
-                <p className="text-sm font-semibold text-brand">{f.no}</p>
-                <h3 className="mt-2 text-lg font-semibold text-brand-dark">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{f.desc}</p>
-              </div>
-            ))}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map((f, i) => {
+              const isBig = i % 4 === 0 || i % 4 === 3;
+              return (
+                <div
+                  key={f.no}
+                  style={{ '--reveal-delay': `${(i % 3) * 90}ms` } as CSSProperties}
+                  className={`reveal feature-card ${isBig ? 'bg-gradient-to-br from-brand-soft/70 to-white lg:col-span-2' : 'lg:col-span-1'}`}
+                >
+                  <p className="text-sm font-semibold text-brand">{f.no}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-brand-dark">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{f.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
