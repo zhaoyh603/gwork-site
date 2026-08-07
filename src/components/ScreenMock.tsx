@@ -1,13 +1,51 @@
 import { useState } from 'react';
 
 export type MockVariant = 'workspace' | 'secretary' | 'kb' | 'security';
+export type MockDisplayMode = 'hero' | 'feature';
 
-/** 真实产品截图（素材未采集/加载失败时回退下方 CSS 模拟） */
-const REAL_SHOTS: Partial<Record<MockVariant, string>> = {
-  workspace: '/screenshots/workspace.png',
-  secretary: '/screenshots/secretary.png',
-  kb: '/screenshots/kb.png',
-  security: '/screenshots/security.png',
+interface ShotMeta {
+  src: string;
+  heroNote: string;
+  heroPosition: string;
+  heroScale: number;
+  featurePosition: string;
+  featureScale: number;
+}
+
+/** 真实产品截图配置：统一描述标题、焦点位置与轻微放大比例。 */
+const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
+  workspace: {
+    src: '/screenshots/workspace.png',
+    heroNote: '项目、工作空间与任务入口集中呈现',
+    heroPosition: 'center top',
+    heroScale: 1.04,
+    featurePosition: '34% 18%',
+    featureScale: 1.42,
+  },
+  secretary: {
+    src: '/screenshots/secretary.png',
+    heroNote: '写作起草、资料处理与技能入口一屏联动',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.44,
+  },
+  kb: {
+    src: '/screenshots/kb.png',
+    heroNote: '检索、引用与资料问答统一承接',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.44,
+  },
+  security: {
+    src: '/screenshots/security.png',
+    heroNote: '规则、审批与安全状态集中可见',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.46,
+  },
 };
 
 const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: number }> = {
@@ -33,19 +71,52 @@ const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: n
   },
 };
 
-/** 产品界面示意图：优先使用真实截图，素材缺失时回退轻量卡片模拟。 */
-export default function ScreenMock({ variant = 'workspace' }: { variant?: MockVariant }) {
+/** 产品界面示意图：根据页面场景切换成首页陈列或功能卡聚焦两种展示模式。 */
+export default function ScreenMock({
+  variant = 'workspace',
+  mode = 'hero',
+}: {
+  variant?: MockVariant;
+  mode?: MockDisplayMode;
+}) {
   const v = VARIANTS[variant];
   const realShot = REAL_SHOTS[variant];
   const [shotFailed, setShotFailed] = useState(false);
   if (realShot && !shotFailed) {
+    const isFeatureMode = mode === 'feature';
     return (
-      <img
-        src={realShot}
-        alt="Gwork 界面截图"
-        className="relative w-full rounded-[28px] border border-white/80 shadow-[0_24px_54px_rgba(19,40,110,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(19,40,110,0.22)]"
-        onError={() => setShotFailed(true)}
-      />
+      <div className={`screen-shot-shell ${isFeatureMode ? 'screen-shot-shell--feature' : 'mock-float'}`}>
+        <div className="screen-shot-shell__halo" />
+        {!isFeatureMode ? (
+          <div className="screen-shot-header">
+            <div className="flex items-center gap-2">
+              <span className="screen-shot-dot bg-[#ff6b81]" />
+              <span className="screen-shot-dot bg-[#ffbf69]" />
+              <span className="screen-shot-dot bg-[#28c76f]" />
+            </div>
+          </div>
+        ) : null}
+        <div className={`screen-shot-stage ${isFeatureMode ? 'screen-shot-stage--feature' : ''}`}>
+          <div className={`screen-shot-frame ${isFeatureMode ? 'screen-shot-frame--feature' : ''}`}>
+            <img
+              src={realShot.src}
+              alt="Gwork 界面截图"
+              className="screen-shot-image"
+              style={{
+                ['--shot-scale' as string]: String(isFeatureMode ? realShot.featureScale : realShot.heroScale),
+                objectPosition: isFeatureMode ? realShot.featurePosition : realShot.heroPosition,
+              }}
+              onError={() => setShotFailed(true)}
+            />
+            <div className="screen-shot-overlay" />
+          </div>
+          {!isFeatureMode ? (
+            <div className="screen-shot-caption">
+              <p className="screen-shot-caption__note">{realShot.heroNote}</p>
+            </div>
+          ) : null}
+        </div>
+      </div>
     );
   }
   return (

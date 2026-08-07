@@ -154,7 +154,7 @@ body {
 
   .hero-stage {
     position: relative;
-    padding: 2rem 0 4.5rem;
+    padding: 1.25rem 0 3.6rem;
   }
 
   .hero-stage-main {
@@ -175,7 +175,7 @@ body {
   .hero-float-card {
     position: absolute;
     z-index: 3;
-    width: 12rem;
+    width: 13rem;
     padding: 1rem 1rem 0.95rem;
     border: 1px solid rgba(255, 255, 255, 0.82);
     border-radius: 1.5rem;
@@ -185,18 +185,51 @@ body {
     animation: float-card 5.8s ease-in-out infinite;
   }
 
+  .hero-float-card-single {
+    top: 1.5rem;
+    right: -1rem;
+  }
+
   .hero-mini-panel {
     position: absolute;
+    left: 1rem;
     right: 1rem;
-    bottom: -1.5rem;
+    bottom: -0.8rem;
     z-index: 3;
-    width: min(100%, 21rem);
-    padding: 1rem;
+    width: auto;
+    padding: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.82);
     border-radius: 1.75rem;
     background: rgba(255, 255, 255, 0.78);
     box-shadow: 0 20px 44px rgba(19, 40, 110, 0.14);
     backdrop-filter: blur(14px);
+  }
+
+  .hero-signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-signal-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.85rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    border-radius: 1.15rem;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 24px rgba(19, 40, 110, 0.06);
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-signal-dot {
+    flex: 0 0 auto;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: 0.45rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #4c6fff 0%, #48c7ff 100%);
+    box-shadow: 0 0 0 6px rgba(76, 111, 255, 0.1);
   }
 
   .feature-showcase {
@@ -263,6 +296,132 @@ body {
     border-radius: 999px;
     background: var(--feature-accent, #4c6fff);
     box-shadow: 0 0 0 5px color-mix(in srgb, var(--feature-accent, #4c6fff) 18%, transparent);
+  }
+
+  .screen-shot-shell {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.84);
+    border-radius: 1.9rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(246, 250, 255, 0.98) 100%);
+    box-shadow: 0 24px 54px rgba(19, 40, 110, 0.16);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(14px);
+  }
+
+  .screen-shot-shell:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 62px rgba(19, 40, 110, 0.2);
+  }
+
+  .screen-shot-shell--feature {
+    border-radius: 1.55rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 248, 255, 0.98) 100%);
+    box-shadow: 0 18px 42px rgba(19, 40, 110, 0.12);
+  }
+
+  .screen-shot-shell__halo {
+    position: absolute;
+    top: -18%;
+    right: -8%;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(76, 111, 255, 0.2) 0%, rgba(72, 199, 255, 0.08) 38%, rgba(76, 111, 255, 0) 72%);
+    filter: blur(10px);
+    pointer-events: none;
+  }
+
+  .screen-shot-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .screen-shot-dot {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 999px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .screen-shot-pill {
+    color: #3a67df;
+    border: 1px solid rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 10px 20px rgba(61, 104, 223, 0.12);
+    @apply inline-flex items-center rounded-full px-3 py-1 text-[11px] font-medium;
+  }
+
+  .screen-shot-stage {
+    position: relative;
+    z-index: 1;
+    padding: 0 1rem 1rem;
+  }
+
+  .screen-shot-stage--feature {
+    padding: 0.6rem;
+  }
+
+  .screen-shot-frame {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.84);
+    border-radius: 1.4rem;
+    background: linear-gradient(180deg, rgba(235, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76), 0 14px 30px rgba(17, 35, 95, 0.12);
+  }
+
+  .screen-shot-frame--feature {
+    aspect-ratio: 4 / 3;
+    border-radius: 1.15rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 10px 22px rgba(17, 35, 95, 0.1);
+  }
+
+  .screen-shot-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center top;
+    transform: scale(var(--shot-scale, 1.02));
+    transition: transform 0.45s ease;
+  }
+
+  .screen-shot-shell:hover .screen-shot-image {
+    transform: scale(calc(var(--shot-scale, 1.02) + 0.03));
+  }
+
+  .screen-shot-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 22%, rgba(11, 28, 74, 0.04) 100%),
+      radial-gradient(circle at 82% 18%, rgba(76, 111, 255, 0.14) 0%, rgba(76, 111, 255, 0) 34%);
+    pointer-events: none;
+  }
+
+  .screen-shot-caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.9rem 0.1rem 0.15rem;
+  }
+
+  .screen-shot-caption__title {
+    @apply text-sm font-semibold text-brand-dark;
+  }
+
+  .screen-shot-caption__note {
+    @apply text-xs text-ink-soft;
   }
 }
 
@@ -355,61 +514,23 @@ body {
 @media (max-width: 1023px) {
   .hero-stage {
     padding-top: 1rem;
-    padding-bottom: 7rem;
-  }
-
-  .hero-float-card {
-    width: calc(50% - 0.5rem);
-  }
-
-  .hero-float-card.left-0 {
-    left: 0;
-  }
-
-  .hero-float-card.right-0 {
-    right: 0;
-  }
-
-  .hero-float-card.bottom-4 {
-    bottom: 4.5rem;
+    padding-bottom: 5.8rem;
   }
 
   .hero-mini-panel {
+    left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
+  }
+
+  .hero-signal-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 767px) {
   .hero-stage {
-    padding-bottom: 16rem;
-  }
-
-  .hero-float-card {
-    width: 100%;
-    position: absolute;
-  }
-
-  .hero-float-card.left-0,
-  .hero-float-card.right-0,
-  .hero-float-card.bottom-4 {
-    left: 0;
-    right: 0;
-  }
-
-  .hero-float-card.top-6 {
-    top: auto;
-    bottom: 11.5rem;
-  }
-
-  .hero-float-card.top-20 {
-    top: auto;
-    bottom: 6rem;
-  }
-
-  .hero-float-card.bottom-4 {
-    bottom: 0.5rem;
+    padding-bottom: 5.5rem;
   }
 
   .feature-preview-frame {
@@ -419,6 +540,14 @@ body {
   .feature-preview-badge {
     left: 1rem;
     right: auto;
+  }
+
+  .screen-shot-caption {
+    padding-bottom: 0;
+  }
+
+  .hero-mini-panel {
+    padding: 0.65rem;
   }
 }
 

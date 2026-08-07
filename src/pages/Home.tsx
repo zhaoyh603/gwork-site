@@ -13,32 +13,11 @@ const HERO_SECURITY_SUMMARY = [
   ['网络规则', '联网出口支持总开关与域名规则'],
   ['操作审计', '关键拦截与处理结果可回溯'],
 ];
-const HERO_FLOATING_CARDS = [
-  {
-    title: '多助手并行',
-    value: '3 个子助手同步处理',
-    note: '检索、汇总、润色分工执行',
-    className: 'left-0 top-6 lg:-left-8',
-  },
-  {
-    title: '知识库命中',
-    value: '12 份制度文件',
-    note: '回答附来源引用',
-    className: 'right-0 top-20 lg:-right-10',
-  },
-  {
-    title: '定时任务',
-    value: '18:00 自动汇总',
-    note: '日报到点自动归档',
-    className: 'bottom-4 left-6 lg:-bottom-6',
-  },
-  {
-    title: '安全中心',
-    value: '审批 / 规则 / 审计',
-    note: '命令、文件、网络多层防护',
-    className: 'left-10 -bottom-8 lg:left-12',
-  },
-];
+const HERO_FLOATING_CARD = {
+  title: '安全中心',
+  value: '审批 / 规则 / 审计',
+  note: '命令、文件、网络多层防护',
+};
 
 /** 首页：以产品价值、核心能力和安全优势为主线承接品牌转化。 */
 export default function Home() {
@@ -83,11 +62,14 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <div className="hero-rise mt-6 grid max-w-2xl gap-3 sm:grid-cols-3" style={{ animationDelay: '560ms' }}>
+            <div className="hero-rise hero-signal-grid mt-6 max-w-2xl gap-3" style={{ animationDelay: '560ms' }}>
               {HERO_SECURITY_SUMMARY.map(([title, desc]) => (
-                <div key={title} className="rounded-[24px] border border-white/80 bg-white/80 px-4 py-4 shadow-sm backdrop-blur-sm">
-                  <p className="text-sm font-semibold text-brand-dark">{title}</p>
-                  <p className="mt-2 text-xs leading-6 text-ink-soft">{desc}</p>
+                <div key={title} className="hero-signal-item">
+                  <div className="hero-signal-dot" />
+                  <div>
+                    <p className="text-sm font-semibold text-brand-dark">{title}</p>
+                    <p className="mt-1 text-xs leading-6 text-ink-soft">{desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -96,29 +78,23 @@ export default function Home() {
             <div className="hero-stage">
               <div className="hero-stage-glow" />
               <div className="hero-stage-main">
-                <ScreenMock variant="workspace" />
+                <ScreenMock variant="workspace" mode="hero" />
               </div>
-              {HERO_FLOATING_CARDS.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`hero-float-card ${item.className}`}
-                  style={{ animationDelay: `${index * 140}ms` }}
-                >
-                  <p className="text-xs font-medium tracking-wide text-brand">{item.title}</p>
-                  <p className="mt-2 text-sm font-semibold text-brand-dark">{item.value}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-ink-soft">{item.note}</p>
-                </div>
-              ))}
+              <div className="hero-float-card hero-float-card-single hidden lg:block">
+                <p className="text-xs font-medium tracking-wide text-brand">{HERO_FLOATING_CARD.title}</p>
+                <p className="mt-2 text-sm font-semibold text-brand-dark">{HERO_FLOATING_CARD.value}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink-soft">{HERO_FLOATING_CARD.note}</p>
+              </div>
               <div className="hero-mini-panel">
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-2">
                   {[
                     ['政务写作', '规范输出'],
                     ['知识问答', '有据可依'],
-                    ['安全状态', '可见可查'],
+                    ['定时任务', '自动归档'],
                   ].map(([title, note]) => (
-                    <div key={title} className="rounded-2xl border border-white/80 bg-white/80 px-3 py-3 shadow-sm">
-                      <p className="text-xs font-medium text-brand-dark">{title}</p>
-                      <p className="mt-1 text-[11px] text-ink-soft">{note}</p>
+                    <div key={title} className="rounded-[18px] border border-white/80 bg-white/85 px-3 py-2.5 shadow-sm">
+                      <p className="text-[11px] font-medium text-brand-dark">{title}</p>
+                      <p className="mt-1 text-[10px] text-ink-soft">{note}</p>
                     </div>
                   ))}
                 </div>

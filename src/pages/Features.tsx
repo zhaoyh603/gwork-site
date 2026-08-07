@@ -189,7 +189,7 @@ export default function Features() {
                     <span className="feature-preview-dot" />
                     已接入场景能力
                   </div>
-                  <ScreenMock variant={MOCK_BY_NO[f.no] ?? 'workspace'} />
+                  <ScreenMock variant={MOCK_BY_NO[f.no] ?? 'workspace'} mode="feature" />
                 </div>
               </div>
             </section>
