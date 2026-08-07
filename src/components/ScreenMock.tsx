@@ -15,7 +15,7 @@ interface ShotMeta {
 /** 真实产品截图配置：统一描述标题、焦点位置与轻微放大比例。 */
 const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
   workspace: {
-    src: '/screenshots/workspace.png',
+    src: 'screenshots/workspace.png',
     heroNote: '项目、工作空间与任务入口集中呈现',
     heroPosition: 'center top',
     heroScale: 1.04,
@@ -23,7 +23,7 @@ const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
     featureScale: 1.42,
   },
   secretary: {
-    src: '/screenshots/secretary.png',
+    src: 'screenshots/secretary.png',
     heroNote: '写作起草、资料处理与技能入口一屏联动',
     heroPosition: 'center top',
     heroScale: 1.05,
@@ -31,7 +31,7 @@ const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
     featureScale: 1.44,
   },
   kb: {
-    src: '/screenshots/kb.png',
+    src: 'screenshots/kb.png',
     heroNote: '检索、引用与资料问答统一承接',
     heroPosition: 'center top',
     heroScale: 1.05,
@@ -39,7 +39,7 @@ const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
     featureScale: 1.44,
   },
   security: {
-    src: '/screenshots/security.png',
+    src: 'screenshots/security.png',
     heroNote: '规则、审批与安全状态集中可见',
     heroPosition: 'center top',
     heroScale: 1.05,
