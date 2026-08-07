@@ -1,5 +1,5 @@
 export interface Feature {
-  /** 序号（01-07，卡片上展示） */
+  /** 序号（01-08，卡片上展示） */
   no: string;
   title: string;
   desc: string;
@@ -22,8 +22,8 @@ export const FEATURES: Feature[] = [
   },
   {
     no: '03',
-    title: '数据本地安全',
-    desc: '资料全部存在本机，不经过第三方云端，敏感数据不出内网。',
+    title: '本地与内网安全',
+    desc: '工作区、资料与会话以本地优先方式组织，可结合内网模型与受控网络环境处理敏感任务。',
     scenario: '涉密材料、内部敏感资料处理',
   },
   {
@@ -49,5 +49,11 @@ export const FEATURES: Feature[] = [
     title: '自带知识库',
     desc: '本地知识库随取随用，内部资料直接问答，回答有据可依。',
     scenario: '内部资料检索、规章制度问答',
+  },
+  {
+    no: '08',
+    title: '安全中心与审计',
+    desc: '已提供命令审批、路径限制、网络规则、删除保护与审计能力，让 AI 自主执行更可控、更可回溯。',
+    scenario: '高安全要求、内网办公、长期稳定使用',
   },
 ];
