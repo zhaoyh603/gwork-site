@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { SITE } from '../data/site';
-import { RELEASE_ARTIFACTS, RELEASE_LOGS } from '../data/releases';
+import {
+  RELEASE_ARTIFACTS,
+  RELEASE_LOGS,
+  type ReleaseArtifact,
+  formatSize,
+  matchArtifact,
+  parseReleaseManifest,
+} from '../data/releases';
 import { useReveal } from '../hooks/useReveal';
+
+/** 更新服务器基址：安装包与版本清单的发布地（发版流程 SSOT）。 */
+const UPDATE_BASE = 'https://updates.oeerp.com';
 
 /** 下载卡片：根据发布状态显示可下载或待发布态。 */
 function DownloadButton({
@@ -45,9 +56,51 @@ const REQUIREMENTS: Array<[string, string]> = [
   ['网络', '首次配置模型时需联网，日常可离线使用'],
 ];
 
+/**
+ * 拉取更新服务器版本清单（mac + Windows），动态构造下载卡片。
+ * 失败时保留静态兜底数据（RELEASE_ARTIFACTS），页面不空。
+ */
+function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[] } | null {
+  const [dynamic, setDynamic] = useState<{ version: string; artifacts: ReleaseArtifact[] } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([
+      fetch(`${UPDATE_BASE}/latest-mac.yml`).then((r) => r.text()),
+      fetch(`${UPDATE_BASE}/latest.yml`).then((r) => r.text()),
+    ])
+      .then(([macYml, winYml]) => {
+        if (cancelled) return;
+        const mac = parseReleaseManifest(macYml);
+        const win = parseReleaseManifest(winYml);
+        const artifacts: ReleaseArtifact[] = [];
+        for (const file of [...mac.files, ...win.files]) {
+          const meta = matchArtifact(file.url);
+          if (meta) artifacts.push({ ...meta, size: formatSize(file.size), url: `${UPDATE_BASE}/${file.url}` });
+        }
+        // 固定卡片展示顺序：Apple Silicon → Intel → Windows（与静态版一致）
+        const ORDER: Record<string, number> = { 'macOS Apple Silicon': 0, 'macOS Intel': 1, 'Windows 64 位': 2 };
+        artifacts.sort((a, b) => (ORDER[a.name] ?? 9) - (ORDER[b.name] ?? 9));
+        if (artifacts.length > 0) setDynamic({ version: mac.version || win.version, artifacts });
+      })
+      .catch((error) => {
+        // 有意兜底：清单拉取失败降级静态版本，不打扰用户；留痕便于排查
+        console.warn('[download] 更新清单拉取失败，使用静态版本', error);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return dynamic;
+}
+
 /** 下载页：承接版本获取、环境要求和版本说明。 */
 export default function Download() {
   const revealRef = useReveal<HTMLDivElement>();
+  const dynamic = useDynamicRelease();
+  const version = dynamic?.version ?? SITE.version;
+  const artifacts = dynamic?.artifacts ?? RELEASE_ARTIFACTS;
   return (
     <div className="site-shell" ref={revealRef}>
       <Nav active="download" />
@@ -56,12 +109,12 @@ export default function Download() {
           <p className="mb-4">
             <span className="eyebrow-pill tracking-wide">获取 Gwork</span>
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">下载 Gwork {SITE.version}</h1>
+          <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">下载 Gwork {version}</h1>
           <p className="mt-4 text-base text-ink-soft">本地安装，免费使用，支持 macOS 与 Windows。</p>
         </div>
 
         <div className="reveal mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-3">
-          {RELEASE_ARTIFACTS.map((artifact) => (
+          {artifacts.map((artifact) => (
             <DownloadButton
               key={artifact.name}
               name={artifact.name}
@@ -172,7 +225,7 @@ export default function Download() {
         <section className="reveal mt-10 rounded-[32px] border border-white/80 bg-white/85 p-8 shadow-[0_18px_40px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <h2 className="text-xl font-semibold text-brand-dark">版本说明</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink">
-            当前版本 {SITE.version}，已提供 macOS 双架构与 Windows 64 位安装包；
+            当前版本 {version}，已提供 macOS 双架构与 Windows 64 位安装包；
             若你更关心首次部署、模型配置或权限说明，建议先阅读安装指南。
           </p>
         </section>

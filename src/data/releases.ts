@@ -22,6 +22,36 @@ export interface ReleaseLogItem {
 
 const UPDATE_BASE = 'https://updates.oeerp.com';
 
+export interface ReleaseFile {
+  /** 相对文件名。 */
+  url: string;
+  /** 字节数。 */
+  size: number;
+}
+
+/** 解析 electron-builder 生成的 yml 清单（latest-mac.yml / latest.yml，格式稳定）。 */
+export function parseReleaseManifest(raw: string): { version: string; files: ReleaseFile[] } {
+  const version = raw.match(/^version:\s*(\S+)/m)?.[1] ?? '';
+  const files = [...raw.matchAll(/^  - url: (\S+)$\n\s+sha512: \S+\n\s+size: (\d+)/gm)].map((m) => ({
+    url: m[1],
+    size: Number(m[2]),
+  }));
+  return { version, files };
+}
+
+/** 按安装包文件名归类平台；未识别返回 null（如 zip/blockmap，官网卡片只给安装包）。 */
+export function matchArtifact(url: string): Omit<ReleaseArtifact, 'url' | 'size'> | null {
+  if (url.endsWith('-mac-arm64.dmg')) return { name: 'macOS Apple Silicon', platform: 'arm64 DMG', available: true };
+  if (url.endsWith('-mac-x64.dmg')) return { name: 'macOS Intel', platform: 'x64 DMG', available: true };
+  if (url.endsWith('.exe')) return { name: 'Windows 64 位', platform: 'x64 安装包', available: true };
+  return null;
+}
+
+/** 字节数转展示文案，如 470399739 → 约 449 MB。 */
+export function formatSize(bytes: number): string {
+  return `约 ${Math.round(bytes / 1024 / 1024)} MB`;
+}
+
 export const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
   { name: 'macOS Apple Silicon', platform: 'arm64 DMG', size: '约 459 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-arm64.dmg` },
   { name: 'macOS Intel', platform: 'x64 DMG', size: '约 480 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-x64.dmg` },
