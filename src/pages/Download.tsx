@@ -14,8 +14,8 @@ import {
 } from '../data/releases';
 import { useReveal } from '../hooks/useReveal';
 
-/** 更新服务器基址：安装包与版本清单的发布地（发版流程 SSOT）。 */
-const UPDATE_BASE = 'https://updates.oeerp.com';
+/** 更新服务基址：安装包与版本清单的发布地（发版流程 SSOT），官网同源读取。 */
+const UPDATE_BASE = 'https://gwork.oeerp.com/updates';
 
 /** 下载卡片：根据发布状态显示可下载或待发布态。 */
 function DownloadButton({
