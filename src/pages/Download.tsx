@@ -6,8 +6,10 @@ import {
   RELEASE_ARTIFACTS,
   RELEASE_LOGS,
   type ReleaseArtifact,
+  type ReleaseLogItem,
   formatSize,
   matchArtifact,
+  parseChangelog,
   parseReleaseManifest,
 } from '../data/releases';
 import { useReveal } from '../hooks/useReveal';
@@ -57,19 +59,24 @@ const REQUIREMENTS: Array<[string, string]> = [
 ];
 
 /**
- * 拉取更新服务器版本清单（mac + Windows），动态构造下载卡片。
- * 失败时保留静态兜底数据（RELEASE_ARTIFACTS），页面不空。
+ * 拉取更新服务器版本清单（mac + Windows）与更新记录（CHANGELOG.md），
+ * 动态构造下载卡片与版本日志。任一拉取失败即回落对应静态兜底，页面不空。
  */
-function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[] } | null {
-  const [dynamic, setDynamic] = useState<{ version: string; artifacts: ReleaseArtifact[] } | null>(null);
+function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[]; changelog: ReleaseLogItem[] } | null {
+  const [dynamic, setDynamic] = useState<{
+    version: string;
+    artifacts: ReleaseArtifact[];
+    changelog: ReleaseLogItem[];
+  } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     Promise.all([
       fetch(`${UPDATE_BASE}/latest-mac.yml`).then((r) => r.text()),
       fetch(`${UPDATE_BASE}/latest.yml`).then((r) => r.text()),
+      fetch(`${UPDATE_BASE}/CHANGELOG.md`).then((r) => r.text()),
     ])
-      .then(([macYml, winYml]) => {
+      .then(([macYml, winYml, changelogRaw]) => {
         if (cancelled) return;
         const mac = parseReleaseManifest(macYml);
         const win = parseReleaseManifest(winYml);
@@ -81,11 +88,14 @@ function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[] } 
         // 固定卡片展示顺序：Apple Silicon → Intel → Windows（与静态版一致）
         const ORDER: Record<string, number> = { 'macOS Apple Silicon': 0, 'macOS Intel': 1, 'Windows 64 位': 2 };
         artifacts.sort((a, b) => (ORDER[a.name] ?? 9) - (ORDER[b.name] ?? 9));
-        if (artifacts.length > 0) setDynamic({ version: mac.version || win.version, artifacts });
+        const changelog = parseChangelog(changelogRaw).slice(0, 4);
+        if (artifacts.length > 0) {
+          setDynamic({ version: mac.version || win.version, artifacts, changelog });
+        }
       })
       .catch((error) => {
-        // 有意兜底：清单拉取失败降级静态版本，不打扰用户；留痕便于排查
-        console.warn('[download] 更新清单拉取失败，使用静态版本', error);
+        // 有意兜底：更新服务器拉取失败降级静态版本，不打扰用户；留痕便于排查
+        console.warn('[download] 更新服务器拉取失败，使用静态版本', error);
       });
     return () => {
       cancelled = true;
@@ -101,6 +111,7 @@ export default function Download() {
   const dynamic = useDynamicRelease();
   const version = dynamic?.version ?? SITE.version;
   const artifacts = dynamic?.artifacts ?? RELEASE_ARTIFACTS;
+  const logs = dynamic?.changelog.length ? dynamic.changelog : RELEASE_LOGS;
   return (
     <div className="site-shell" ref={revealRef}>
       <Nav active="download" />
@@ -168,7 +179,7 @@ export default function Download() {
         <section className="reveal mt-10 rounded-[32px] border border-white/80 bg-white/85 p-8 shadow-[0_18px_40px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <h2 className="text-xl font-semibold text-brand-dark">版本日志 / 更新记录</h2>
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
-            {RELEASE_LOGS.map((log) => (
+            {logs.map((log) => (
               <article key={log.title} className="feature-showcase overflow-hidden rounded-[28px] border border-white/80 px-5 py-5 shadow-sm">
                 <div className="feature-showcase__wash" />
                 <div className="relative z-[1]">

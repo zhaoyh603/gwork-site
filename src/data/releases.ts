@@ -58,10 +58,29 @@ export const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
   { name: 'Windows 64 位', platform: 'x64 安装包', size: '约 627 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-x64.exe` },
 ];
 
+/** 解析 CHANGELOG.md（## 版本（日期） + - 条目，标题与条目间允许空行），兼容全/半角括号。 */
+export function parseChangelog(raw: string): ReleaseLogItem[] {
+  return raw
+    .split(/^## /m)
+    .slice(1)
+    .map((block) => {
+      const [header, ...rest] = block.split('\n');
+      const m = header.match(/^([^\s（(]+)[（(]([^）)]+)[)）]/);
+      if (!m) return null;
+      return {
+        date: m[2],
+        title: `版本 ${m[1]}`,
+        items: rest.map((l) => l.replace(/^-\s*/, '').trim()).filter(Boolean),
+      };
+    })
+    .filter((l): l is ReleaseLogItem => l !== null);
+}
+
+/** 静态兜底：仅当更新服务器清单与 CHANGELOG 都拉取失败时展示。 */
 export const RELEASE_LOGS: ReleaseLogItem[] = [
   {
     date: '2026-08-21',
-    title: '当前版本 0.9.6',
+    title: '版本 0.9.6',
     items: [
       '新增 Windows 64 位安装包，macOS / Windows 双平台可用',
       '关于页新增更新记录，可查看历次版本改进',
@@ -70,20 +89,5 @@ export const RELEASE_LOGS: ReleaseLogItem[] = [
       '执行命令时增加安全校验，防止越界访问其他位置的文件',
       '修复工作区切换、知识库入口与 wiki 中文命名等问题',
     ],
-  },
-  {
-    date: '近期重点',
-    title: '最近更新内容',
-    items: ['强化多助手协同执行与子任务分工体验', '继续完善知识库问答与本地资料检索能力', '补充桌面版发布产物与下载说明'],
-  },
-  {
-    date: '稳定性',
-    title: '已修复 / 优化方向',
-    items: ['优化版本展示与发布信息的一致性', '改进打包产物命名和多架构发布整理', '持续提升大体积运行时资源的获取稳定性'],
-  },
-  {
-    date: '下一步',
-    title: '下个版本计划',
-    items: ['补齐 Windows 64 位安装包对外发布', '完善官网安装文档、FAQ 与典型场景说明', '继续增强安全、知识库与更新体验'],
   },
 ];
