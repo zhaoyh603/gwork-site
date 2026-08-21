@@ -7,6 +7,8 @@ export interface ReleaseArtifact {
   size: string;
   /** 是否已提供下载。 */
   available: boolean;
+  /** 安装包直链（更新服务器）。 */
+  url: string;
 }
 
 export interface ReleaseLogItem {
@@ -18,17 +20,26 @@ export interface ReleaseLogItem {
   items: string[];
 }
 
+const UPDATE_BASE = 'https://updates.oeerp.com';
+
 export const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
-  { name: 'macOS Apple Silicon', platform: 'arm64 DMG / ZIP', size: '约 457 MB - 468 MB', available: true },
-  { name: 'macOS Intel', platform: 'x64 DMG / ZIP', size: '约 478 MB - 489 MB', available: true },
-  { name: 'Windows 64 位', platform: 'x64 安装包', size: '发布中', available: false },
+  { name: 'macOS Apple Silicon', platform: 'arm64 DMG', size: '约 459 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-arm64.dmg` },
+  { name: 'macOS Intel', platform: 'x64 DMG', size: '约 480 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-x64.dmg` },
+  { name: 'Windows 64 位', platform: 'x64 安装包', size: '约 627 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-x64.exe` },
 ];
 
 export const RELEASE_LOGS: ReleaseLogItem[] = [
   {
-    date: '2026-08-04',
-    title: '当前版本 0.9.0',
-    items: ['提供 macOS arm64 / x64 双架构构建包', '支持桌面端工作区、多助手协同与知识库能力', '延续桌面产品的本地优先使用方式'],
+    date: '2026-08-21',
+    title: '当前版本 0.9.6',
+    items: [
+      '新增 Windows 64 位安装包，macOS / Windows 双平台可用',
+      '关于页新增更新记录，可查看历次版本改进',
+      '应用更新源切换为国内服务器，检查和下载新版本更快',
+      '粘贴文件时自动插入完整路径，分享文件更可靠',
+      '执行命令时增加安全校验，防止越界访问其他位置的文件',
+      '修复工作区切换、知识库入口与 wiki 中文命名等问题',
+    ],
   },
   {
     date: '近期重点',

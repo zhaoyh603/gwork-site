@@ -10,13 +10,15 @@ function DownloadButton({
   platform,
   size,
   available,
+  url,
 }: {
   name: string;
   platform: string;
   size: string;
   available: boolean;
+  url: string;
 }) {
-  const href = available ? SITE.releaseUrl : '';
+  const href = available ? url : '';
   return (
     <a
       href={href || '#'}
@@ -66,6 +68,7 @@ export default function Download() {
               platform={artifact.platform}
               size={artifact.size}
               available={artifact.available}
+              url={artifact.url}
             />
           ))}
         </div>
@@ -169,7 +172,7 @@ export default function Download() {
         <section className="reveal mt-10 rounded-[32px] border border-white/80 bg-white/85 p-8 shadow-[0_18px_40px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <h2 className="text-xl font-semibold text-brand-dark">版本说明</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink">
-            当前版本 {SITE.version}，优先提供 macOS 双架构安装包。Windows 64 位安装包会随着发布节奏继续补齐；
+            当前版本 {SITE.version}，已提供 macOS 双架构与 Windows 64 位安装包；
             若你更关心首次部署、模型配置或权限说明，建议先阅读安装指南。
           </p>
         </section>
