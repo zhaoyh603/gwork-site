@@ -93,12 +93,6 @@ body {
     border-color: rgba(76, 111, 255, 0.28);
   }
 
-  .stat-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(238, 243, 255, 0.95) 100%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 16px 32px rgba(17, 35, 95, 0.08);
-    @apply rounded-3xl border border-white/80 px-6 py-7 text-center;
-  }
-
   .section-wash {
     background: linear-gradient(180deg, rgba(244, 248, 255, 0.82) 0%, rgba(255, 255, 255, 0.95) 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.7);
@@ -203,33 +197,6 @@ body {
     background: rgba(255, 255, 255, 0.78);
     box-shadow: 0 20px 44px rgba(19, 40, 110, 0.14);
     backdrop-filter: blur(14px);
-  }
-
-  .hero-signal-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .hero-signal-item {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    padding: 0.85rem 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.78);
-    border-radius: 1.15rem;
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 10px 24px rgba(19, 40, 110, 0.06);
-    backdrop-filter: blur(10px);
-  }
-
-  .hero-signal-dot {
-    flex: 0 0 auto;
-    width: 0.55rem;
-    height: 0.55rem;
-    margin-top: 0.45rem;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #4c6fff 0%, #48c7ff 100%);
-    box-shadow: 0 0 0 6px rgba(76, 111, 255, 0.1);
   }
 
   .feature-showcase {
@@ -471,22 +438,6 @@ body {
   animation: mock-float 6s ease-in-out infinite;
 }
 
-@keyframes metric-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.94);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.metric-in {
-  animation: metric-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 @keyframes halo-drift {
   0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -521,10 +472,6 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-  }
-
-  .hero-signal-grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -561,7 +508,6 @@ body {
   .hero-rise,
   .hero-stage-glow,
   .hero-float-card,
-  .metric-in,
   .mock-float {
     animation: none;
   }

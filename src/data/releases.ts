@@ -32,7 +32,7 @@ export interface ReleaseFile {
 /** 解析 electron-builder 生成的 yml 清单（latest-mac.yml / latest.yml，格式稳定）。 */
 export function parseReleaseManifest(raw: string): { version: string; files: ReleaseFile[] } {
   const version = raw.match(/^version:\s*(\S+)/m)?.[1] ?? '';
-  const files = [...raw.matchAll(/^  - url: (\S+)$\n\s+sha512: \S+\n\s+size: (\d+)/gm)].map((m) => ({
+  const files = [...raw.matchAll(/^ {2}- url: (\S+)$\n\s+sha512: \S+\n\s+size: (\d+)/gm)].map((m) => ({
     url: m[1],
     size: Number(m[2]),
   }));
