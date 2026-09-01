@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import CtaButton from '../components/CtaButton';
-import ScreenMock from '../components/ScreenMock';
+import ScreenMock, { type MockVariant } from '../components/ScreenMock';
 import { FEATURES } from '../data/features';
 import { SECURITY_MECHANISMS } from '../data/security';
 import { useReveal } from '../hooks/useReveal';
@@ -16,12 +16,12 @@ interface FeaturePresentation {
 }
 
 /** 每节配图变体：公文→secretary，知识库→kb，其余→workspace（03 数据安全配 kb 检索画面语义错配，用中性工作区画面；未映射时 ?? 'workspace' 兜底） */
-const MOCK_BY_NO: Record<string, 'workspace' | 'secretary' | 'kb' | 'security'> = {
+const MOCK_BY_NO: Record<string, MockVariant> = {
   '01': 'secretary',
-  '02': 'workspace',
+  '02': 'assistant',
   '03': 'security',
-  '04': 'workspace',
-  '05': 'workspace',
+  '04': 'skills',
+  '05': 'model-config',
   '06': 'workspace',
   '07': 'kb',
   '08': 'security',

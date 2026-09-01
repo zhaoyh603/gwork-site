@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type MockVariant = 'workspace' | 'secretary' | 'kb' | 'security';
+export type MockVariant = 'workspace' | 'secretary' | 'kb' | 'security' | 'assistant' | 'model-config' | 'skills';
 export type MockDisplayMode = 'hero' | 'feature';
 
 interface ShotMeta {
@@ -46,6 +46,30 @@ const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
     featurePosition: '34% 18%',
     featureScale: 1.46,
   },
+  assistant: {
+    src: 'screenshots/assistant.png',
+    heroNote: '主助手派发、子助手并行，协同任务一屏掌握',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.42,
+  },
+  'model-config': {
+    src: 'screenshots/model-config.png',
+    heroNote: '多模型厂商自由接入，按场景选模型',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.42,
+  },
+  skills: {
+    src: 'screenshots/skills.png',
+    heroNote: '技能与 MCP 服务可插拔，按需启用',
+    heroPosition: 'center top',
+    heroScale: 1.05,
+    featurePosition: '34% 18%',
+    featureScale: 1.42,
+  },
 };
 
 const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: number }> = {
@@ -67,6 +91,21 @@ const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: n
   security: {
     tabs: ['安全中心', '审批记录', '审计日志'],
     lines: ['网络访问规则：已限制非白名单域名', '命令执行审批：待批准 2 条，已批准 15 条', '删除保护已开启，敏感操作均需确认'],
+    active: 0,
+  },
+  assistant: {
+    tabs: ['主助手', '子智能体', '后台任务'],
+    lines: ['帮我完善这份财务报告，按章节拆给子智能体', '已派发 3 个子智能体并行处理，分别负责三大板块', '子智能体运行中，完成后我将统一合稿'],
+    active: 0,
+  },
+  'model-config': {
+    tabs: ['模型配置', '供应商列表'],
+    lines: ['选择供应商：DeepSeek、通义、智谱、Kimi…', '支持 OpenAI / Claude 兼容协议与本地模型', '按场景自由切换，密钥存在本机'],
+    active: 0,
+  },
+  skills: {
+    tabs: ['SKILLS & MCP', '技能', 'MCP'],
+    lines: ['技能可插拔：公文、文档、检索按需启用', 'MCP 服务全局配置、按工作空间隔离', '新增服务：导入配置文件或手动填写'],
     active: 0,
   },
 };
