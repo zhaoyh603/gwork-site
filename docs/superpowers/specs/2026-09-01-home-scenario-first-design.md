@@ -113,7 +113,7 @@ Gwork 官网首页（`src/pages/Home.tsx`）当前以「安全能力」为主线
 | `src/data/scenarios.ts` | 替换第 4 场景，4 场景加 `id` + `features`（3 个功能点）字段 |
 | `src/pages/Scenarios.tsx` | 卡片加 id 锚点 + 「用到的功能」区块渲染 |
 | `src/data/features.ts` | 03/08 两项 desc 微调：08「命令审批、路径限制、网络规则、删除保护与审计能力」→「高风险操作需确认、网络出口可管控、处理过程有记录，让 AI 干活更可控、可回溯」；03 scenario「涉密材料、内部敏感资料处理」→「内网环境、敏感资料处理」 |
-| `src/components/ScreenMock.tsx` | Hero 浮动卡文字「安全中心」→「通知初稿」 |
+| `src/pages/Home.tsx` | `HERO_FLOATING_CARD` 常量文字「安全中心/审批·规则·审计」→「通知初稿/已按公文体例起草」 |
 
 数据与展示分离：文案统一收拢 `src/data`，页面只做渲染。
 
