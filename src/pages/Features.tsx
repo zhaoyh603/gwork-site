@@ -22,9 +22,9 @@ const MOCK_BY_NO: Record<string, 'workspace' | 'secretary' | 'kb' | 'security'> 
   '03': 'security',
   '04': 'workspace',
   '05': 'workspace',
-  '06': 'kb',
+  '06': 'workspace',
   '07': 'kb',
-  '08': 'workspace',
+  '08': 'security',
 };
 
 const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
