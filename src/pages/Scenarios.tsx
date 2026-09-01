@@ -22,7 +22,7 @@ export default function Scenarios() {
             不是“能做什么”，而是“落地后怎么用”
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">
-            Gwork 面向政企办公场景，重点解决公文写作、知识问答、材料整理与本地安全办公等高频问题。
+            Gwork 面向政企办公场景，重点解决公文写作、知识问答、材料整理与定时任务等高频问题。
             先看清典型流程，再判断是否适合你的团队。
           </p>
         </div>
@@ -37,8 +37,9 @@ export default function Scenarios() {
           <div className="grid gap-6">
             {SCENARIOS.map((scenario, index) => (
               <section
-                key={scenario.title}
-                className="reveal feature-showcase overflow-hidden rounded-[32px] border border-white/80 px-6 py-8 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm lg:px-10"
+                id={scenario.id}
+                key={scenario.id}
+                className="reveal feature-showcase scroll-mt-20 overflow-hidden rounded-[32px] border border-white/80 px-6 py-8 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm lg:px-10"
                 style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
               >
                 <div className="feature-showcase__wash" />
@@ -71,6 +72,17 @@ export default function Scenarios() {
                           <p className="text-sm text-ink">{outcome}</p>
                         </div>
                       ))}
+                    </div>
+                    <div className="mt-6">
+                      <p className="text-sm font-semibold text-brand-dark">用到的功能</p>
+                      <div className="mt-3 space-y-2">
+                        {scenario.features.map((f) => (
+                          <div key={f.title} className="rounded-2xl border border-white/80 bg-white/80 px-4 py-3 shadow-sm">
+                            <p className="text-sm font-semibold text-ink">{f.title}</p>
+                            <p className="mt-0.5 text-xs leading-5 text-ink-soft">{f.desc}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="mt-6 rounded-[24px] border border-brand-glow bg-surface-soft px-5 py-5">
                       <p className="text-sm font-semibold text-brand-dark">推荐起步方式</p>
