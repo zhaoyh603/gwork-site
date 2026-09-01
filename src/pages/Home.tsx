@@ -111,14 +111,7 @@ export default function Home() {
                 </div>
                 <h3 className="mt-2 text-lg font-semibold text-brand-dark">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.summary}</p>
-                <ul className="mt-4 grid gap-2 sm:grid-cols-3">
-                  {s.features.map((f) => (
-                    <li key={f.title} className="rounded-xl border border-white/80 bg-white/70 px-3 py-2">
-                      <p className="text-xs font-semibold text-brand-dark">{f.title}</p>
-                      <p className="mt-1 text-[11px] leading-5 text-ink-soft">{f.desc}</p>
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-4 text-sm font-semibold text-brand">用到的功能：{s.features.map((f) => f.title).join(' · ')}</p>
               </a>
             ))}
           </div>
