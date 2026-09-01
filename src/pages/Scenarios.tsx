@@ -99,10 +99,9 @@ export default function Scenarios() {
 
         <section className="reveal py-16 text-center">
           <h2 className="text-2xl font-semibold text-brand-dark">想进一步确认是否适合你的业务？</h2>
-          <p className="mt-3 text-base text-ink-soft">可以先看安装指南与 FAQ，再决定试用方式。</p>
+          <p className="mt-3 text-base text-ink-soft">可以先看安装指南，再决定试用方式。</p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <CtaButton href="./guide.html">查看安装指南</CtaButton>
-            <a href="./faq.html" className="text-link inline-flex items-center text-base">查看 FAQ →</a>
           </div>
         </section>
       </main>

@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { SITE } from '../data/site';
 import CtaButton from './CtaButton';
 
-export type NavActive = 'home' | 'features' | 'scenarios' | 'faq' | 'guide' | 'download';
+export type NavActive = 'home' | 'features' | 'scenarios' | 'guide' | 'download';
 
 const LINKS: Array<{ key: Exclude<NavActive, 'home'>; label: string; href: string }> = [
   { key: 'features', label: '功能', href: './features.html' },
   { key: 'scenarios', label: '场景', href: './scenarios.html' },
-  { key: 'faq', label: 'FAQ', href: './faq.html' },
   { key: 'guide', label: '安装指南', href: './guide.html' },
 ];
 

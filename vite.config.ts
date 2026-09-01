@@ -15,7 +15,6 @@ export default defineConfig({
         features: path.resolve(__dirname, 'features.html'),
         download: path.resolve(__dirname, 'download.html'),
         scenarios: path.resolve(__dirname, 'scenarios.html'),
-        faq: path.resolve(__dirname, 'faq.html'),
         guide: path.resolve(__dirname, 'guide.html'),
       },
     },

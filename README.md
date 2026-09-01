@@ -39,6 +39,5 @@ pnpm build && pnpm exec vite preview
 | 首页 | `index.html`（`src/main-home.tsx`） |
 | 功能 | `features.html` |
 | 场景 | `scenarios.html` |
-| FAQ | `faq.html` |
 | 安装指南（面向用户） | `guide.html` |
 | 下载 | `download.html` |

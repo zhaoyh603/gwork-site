@@ -3,7 +3,6 @@ import { SITE } from '../data/site';
 const FOOTER_LINKS = [
   { label: '功能', href: './features.html' },
   { label: '场景', href: './scenarios.html' },
-  { label: 'FAQ', href: './faq.html' },
   { label: '安装指南', href: './guide.html' },
 ] as const;
 

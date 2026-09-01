@@ -170,7 +170,6 @@ export default function Download() {
               </div>
               <div className="mt-5 flex flex-wrap gap-4">
                 <a href="./guide.html" className="text-link inline-flex items-center text-base">查看完整安装指南 →</a>
-                <a href="./faq.html" className="text-link inline-flex items-center text-base">查看常见问题 →</a>
               </div>
             </div>
           </div>
