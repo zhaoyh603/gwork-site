@@ -94,7 +94,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <SectionTitle
             kicker="典型场景"
-            title="从案头到交付，办公的事都帮得上忙"
+            title="从案头到交付，办公的事都交给我"
             desc="四个高频场景，覆盖政企办公日常。"
           />
           <div className="grid gap-5 lg:grid-cols-2">
