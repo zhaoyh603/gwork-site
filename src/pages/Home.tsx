@@ -4,22 +4,18 @@ import CtaButton from '../components/CtaButton';
 import SectionTitle from '../components/SectionTitle';
 import ScreenMock from '../components/ScreenMock';
 import { FEATURES } from '../data/features';
+import { SCENARIOS } from '../data/scenarios';
 import { useReveal } from '../hooks/useReveal';
 import type { CSSProperties } from 'react';
 
-const HERO_HIGHLIGHTS = ['支持 macOS 与 Windows', '安装即用', '适配国产模型', '安全中心可见'];
-const HERO_SECURITY_SUMMARY = [
-  ['命令审批', '高风险命令可拦截或确认后执行'],
-  ['网络规则', '联网出口支持总开关与域名规则'],
-  ['操作审计', '关键拦截与处理结果可回溯'],
-];
+const HERO_HIGHLIGHTS = ['按体例起草公文', '回答带出处', '数据留在本机', '支持 macOS 与 Windows'];
 const HERO_FLOATING_CARD = {
-  title: '安全中心',
-  value: '审批 / 规则 / 审计',
-  note: '命令、文件、网络多层防护',
+  title: '通知初稿',
+  value: '已按公文体例起草',
+  note: '标题、主送单位、正文框架齐全',
 };
 
-/** 首页：以产品价值、核心能力和安全优势为主线承接品牌转化。 */
+/** 首页：以场景价值和核心能力为主线承接品牌转化，安全作为信任背书。 */
 export default function Home() {
   const revealRef = useReveal<HTMLDivElement>();
   return (
@@ -34,20 +30,20 @@ export default function Home() {
               className="hero-rise mb-5"
               style={{ animationDelay: '0ms' }}
             >
-              <span className="eyebrow-pill">本地优先 · 安全可控</span>
+              <span className="eyebrow-pill">政企办公 · 专业助手</span>
             </p>
             <h1
               className="hero-rise max-w-xl text-4xl font-semibold leading-tight tracking-tight text-brand-dark lg:text-6xl"
               style={{ animationDelay: '120ms' }}
             >
-              AI 驱动的政企办公助手
+              专业的事，交给专业的 AI 助手
             </h1>
             <p
               className="hero-rise mt-6 max-w-xl text-lg leading-relaxed text-ink-soft lg:text-xl"
               style={{ animationDelay: '240ms' }}
             >
-              多助手协同干活，公文、材料、知识库一站搞定。所有数据留在本机，
-              敏感资料不出内网，并提供安全中心、联网规则和审计能力，让 AI 在真实工作区里更可控。
+              公文起草、材料整理、制度问答、周报汇总——不是聊天式问答，而是按政企工作习惯交付：
+              按体例起草、带出处回答、到点自动执行。数据留在本机，模型可接内网，无需注册、无需积分。
             </p>
             <div className="hero-rise mt-8 flex flex-wrap items-center gap-4" style={{ animationDelay: '360ms' }}>
               <CtaButton href="./download.html" size="lg">下载 Gwork</CtaButton>
@@ -60,17 +56,6 @@ export default function Home() {
                 <span key={item} className="rounded-full border border-white/80 bg-white/70 px-4 py-2 shadow-sm backdrop-blur-sm">
                   {item}
                 </span>
-              ))}
-            </div>
-            <div className="hero-rise hero-signal-grid mt-6 max-w-2xl gap-3" style={{ animationDelay: '560ms' }}>
-              {HERO_SECURITY_SUMMARY.map(([title, desc]) => (
-                <div key={title} className="hero-signal-item">
-                  <div className="hero-signal-dot" />
-                  <div>
-                    <p className="text-sm font-semibold text-brand-dark">{title}</p>
-                    <p className="mt-1 text-xs leading-6 text-ink-soft">{desc}</p>
-                  </div>
-                </div>
               ))}
             </div>
           </div>
@@ -104,41 +89,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. 亮点条 */}
-      <section className="section-wash">
-        <div className="reveal mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 py-10 sm:grid-cols-3">
-          {[
-            ['数据本地存储', '资料存在本机，不依赖云端'],
-            ['兼容主流大模型', '含 DeepSeek、通义、智谱、Kimi 等国产模型'],
-            ['安全中心', '审批、网络规则与审计能力可见'],
-          ].map(([title, desc]) => (
-            <div key={title} className="surface-card px-6 py-7 text-center">
-              <p className="font-medium text-brand-dark">{title}</p>
-              <p className="mt-1.5 text-sm text-ink-soft">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 2.5 数据指标条 */}
+      {/* 2. 场景区（替换原亮点条 + 数据指标条） */}
       <section className="border-b border-white/70 bg-transparent">
-        <div className="mx-auto max-w-6xl px-6 py-12">
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {[
-              ['8 项核心能力', '办公能力与安全控制一起补齐'],
-              ['本地优先', '数据与工作区按本机优先方式组织'],
-              ['多模型厂商', '含 DeepSeek、通义、智谱、Kimi 等'],
-              ['安全中心', '命令、网络、删除与审计更可控'],
-            ].map(([num, label], i) => (
-              <div key={label} className="stat-card">
-                <p
-                  className="metric-in text-3xl font-semibold text-brand"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  {num}
-                </p>
-                <p className="mt-2 text-sm text-ink-soft">{label}</p>
-              </div>
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <SectionTitle
+            kicker="典型场景"
+            title="材料活，从起草到归档都能帮上忙"
+            desc="四个高频场景，覆盖政企办公日常。"
+          />
+          <div className="grid gap-5 lg:grid-cols-2">
+            {SCENARIOS.map((s, i) => (
+              <a
+                key={s.id}
+                href={`./scenarios.html#${s.id}`}
+                className="reveal feature-card group p-6 transition-shadow hover:shadow-[0_18px_40px_rgba(19,40,110,0.12)]"
+                style={{ '--reveal-delay': `${(i % 2) * 90}ms` } as CSSProperties}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm font-semibold text-brand">{s.kicker}</span>
+                  <span className="text-xs text-ink-soft opacity-0 transition-opacity group-hover:opacity-100">查看详情 →</span>
+                </div>
+                <h3 className="mt-2 text-lg font-semibold text-brand-dark">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.summary}</p>
+                <ul className="mt-4 grid gap-2 sm:grid-cols-3">
+                  {s.features.map((f) => (
+                    <li key={f.title} className="rounded-xl border border-white/80 bg-white/70 px-3 py-2">
+                      <p className="text-xs font-semibold text-brand-dark">{f.title}</p>
+                      <p className="mt-1 text-[11px] leading-5 text-ink-soft">{f.desc}</p>
+                    </li>
+                  ))}
+                </ul>
+              </a>
             ))}
           </div>
         </div>
@@ -198,34 +179,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. 安全合规区 */}
+      {/* 5. 信任背书区（原安全合规区） */}
       <section className="border-b border-white/70 bg-transparent">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <SectionTitle
-            kicker="安全合规"
-            title="资料不出门，数据你作主"
-            desc="面向政企场景，安全是第一优先级。"
+            kicker="安全可控"
+            title="数据不出门，用着放心"
+            desc="面向政企场景，安全是底线不是卖点。"
           />
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div
-              className="reveal surface-card-soft p-8"
-              style={{ '--reveal-delay': '0ms' } as CSSProperties}
-            >
-              <h3 className="text-lg font-semibold text-brand-dark">数据存储在本机</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink">
-                对话记录、知识库、工作区数据全部存在本机；模型可自由选择云端或内网部署，按需满足安全要求。
-              </p>
-            </div>
-            <div
-              className="reveal surface-card-soft p-8"
-              style={{ '--reveal-delay': '90ms' } as CSSProperties}
-            >
-              <h3 className="text-lg font-semibold text-brand-dark">可控可查，随时清理</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink">
-                会话与工作区上下文清晰可见，敏感资料用后可一键清理，不留痕迹。
-              </p>
-            </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {[
+              ['数据留本机', '对话记录、知识库、工作区数据全部存在本机，模型可自由选择云端或内网部署'],
+              ['操作可审计', '关键拦截与处理结果可回溯，AI 干活心里有数'],
+              ['可随时清理', '会话与上下文一键清理，敏感资料不留痕迹'],
+            ].map(([title, desc], i) => (
+              <div
+                key={title}
+                className="reveal surface-card px-6 py-7"
+                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
+              >
+                <h3 className="font-semibold text-brand-dark">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{desc}</p>
+              </div>
+            ))}
           </div>
+          <p className="mt-8 text-center text-sm text-ink-soft">
+            完整安全机制见 <a href="./features.html" className="text-link">功能页 →</a>
+          </p>
         </div>
       </section>
 
