@@ -491,16 +491,27 @@ Co-Authored-By: deepseek-v4-flash[1m]@claudecode"
 
 ---
 
-### Task 5: site.css 删除 hero-signal 死代码
+### Task 5: site.css 死代码清理（hero-signal + stat-card + metric-in）
 
 **Files:**
-- Modify: `src/styles/site.css:208-233`（主定义）与 `src/styles/site.css:526-528`（媒体查询）
+- Modify: `src/styles/site.css`（hero-signal 主定义 ~208-233、stat-card ~96、metric-in 主定义 ~474-486、媒体查询两处 ~526-528 与 ~564）
+- Modify: `src/data/releases.ts:35`（顺手修 pre-existing lint：no-regex-spaces，Task 6 三件套需要 lint 全绿）
 
-- [ ] **Step 1: 删除主定义 `.hero-signal-grid` / `.hero-signal-item` / `.hero-signal-dot`（208-233 行整段）**
+> 质量审查补充：Task 3 删除数据指标条后，`stat-card` / `metric-in` / `@keyframes metric-in` 成为孤儿样式，与本任务 hero-signal 同性质，一并清理；`releases.ts:35` 的 `no-regex-spaces` 是 8a65ffc 引入的 pre-existing 错误，Task 6 验收会被卡，顺手修复。
+
+- [ ] **Step 1: 删除 `.stat-card`（~96 行）**
+
+用编辑器删除 `.stat-card { ... }` 整块（Task 3 删数据指标条后无引用）。
+
+- [ ] **Step 2: 删除 `.metric-in` 与 `@keyframes metric-in`（~474-486 与 ~564）**
+
+删除 `.metric-in { ... }` 样式定义与 `@keyframes metric-in` 动画块（含媒体查询内的 `.metric-in` 覆盖若存在）。
+
+- [ ] **Step 3: 删除主定义 `.hero-signal-grid` / `.hero-signal-item` / `.hero-signal-dot`（208-233 行整段）**
 
 用编辑器精确删除从 `.hero-signal-grid {` 到 `.hero-signal-dot { ... }` 结尾的整块（含中间空行），保留前后相邻类（`.hero-float-card` 相关与 `.feature-showcase`）。
 
-- [ ] **Step 2: 删除媒体查询中的 `.hero-signal-grid` 覆盖（526-528 行）**
+- [ ] **Step 4: 删除媒体查询中的 `.hero-signal-grid` 覆盖（526-528 行）**
 
 删除：
 ```css
@@ -509,17 +520,25 @@ Co-Authored-By: deepseek-v4-flash[1m]@claudecode"
   }
 ```
 
-- [ ] **Step 3: 验证无残留 + Commit**
+- [ ] **Step 5: 修复 releases.ts:35 lint 错误**
 
-Run: `grep -rn "hero-signal" src/`
+Run: `pnpm lint` 查看具体报错行；`no-regex-spaces` 需将正则中的连续空格改为 `\s`（或 `\s+`，按语义），只修这一行，不扩展范围。
+
+- [ ] **Step 6: 验证无残留 + 三件套 + Commit**
+
+Run: `grep -rn "hero-signal\|stat-card\|metric-in" src/`
 Expected: 无输出
 
-```bash
-git add src/styles/site.css
-git commit -m "chore(site): 删 hero-signal 死代码——随首页安全信号卡移除
+Run: `pnpm type-check && pnpm lint && pnpm build`
+Expected: 全部通过
 
-hero-signal-* 样式仅 Home.tsx 安全信号卡使用，区块删除后一并清理，
-防止残留误导后续维护。
+```bash
+git add src/styles/site.css src/data/releases.ts
+git commit -m "chore(site): 删首页遗留死 CSS（hero-signal/stat-card/metric-in）+ 修 releases lint
+
+Task 3 首页重构后 hero-signal/stat-card/metric-in 无引用，一并清理；
+releases.ts:35 no-regex-spaces 为 pre-existing lint 错误，顺手修复
+保证三件套全绿。
 
 Co-Authored-By: deepseek-v4-flash[1m]@claudecode"
 ```
