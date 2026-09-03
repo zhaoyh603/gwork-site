@@ -15,7 +15,7 @@ interface FeaturePresentation {
   style: CSSProperties;
 }
 
-/** 每节配图变体：公文→secretary，知识库→kb，其余→workspace（03 数据安全配 kb 检索画面语义错配，用中性工作区画面；未映射时 ?? 'workspace' 兜底） */
+/** 每节配图变体：01→secretary、02→assistant、04→skills、05→model-config、07→kb；03 本地与内网安全与 08 安全中心共用 security 画面；未映射时 ?? 'workspace' 兜底 */
 const MOCK_BY_NO: Record<string, MockVariant> = {
   '01': 'secretary',
   '02': 'assistant',

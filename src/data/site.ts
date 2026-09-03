@@ -3,7 +3,7 @@ const GITHUB_REPO = 'https://github.com/zhaoyh603/gwork';
 
 export const SITE = {
   name: 'Gwork',
-  version: '0.9.6',
+  version: '0.9.16',
   /** GitHub 仓库地址：用于外链源码、README 与 Releases。 */
   github: GITHUB_REPO,
   /** 文档外链：第一版仍提供仓库 README 作为补充阅读入口。 */
