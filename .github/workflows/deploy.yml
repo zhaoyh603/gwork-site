@@ -29,6 +29,8 @@ jobs:
       # lockfile 的 tarball URL 绑定本地 npmmirror 镜像（~/.npmrc），pnpm 供应链校验需对齐 registry
       - run: pnpm config set registry https://registry.npmmirror.com
       - run: pnpm install --frozen-lockfile
+      - run: pnpm type-check
+      - run: pnpm lint
       - run: pnpm build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
