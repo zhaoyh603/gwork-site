@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import CtaButton from '../components/CtaButton';
@@ -11,6 +12,14 @@ import { useReveal } from '../hooks/useReveal';
 /** 配置指南页：装好之后的完整上手手册——四大板块图文操作步骤。 */
 export default function Guide() {
   const revealRef = useReveal<HTMLDivElement>();
+
+  useEffect(() => {
+    // 内容由 React 渲染，浏览器的初始片段定位发生在渲染前且不重试——
+    // 冷打开（新标签/分享链接）guide.html#<id> 时需挂载后补一次滚动
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    document.getElementById(hash)?.scrollIntoView();
+  }, []);
 
   return (
     <div className="site-shell" ref={revealRef}>
