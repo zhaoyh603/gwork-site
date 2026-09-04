@@ -228,6 +228,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-chat-vision.png',
+            width: 2000,
+            height: 1158,
             alt: '对话中发图片被正确理解',
             caption: '发一张图，它能描述画面内容',
           },
@@ -348,6 +350,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-chat-main.png',
+            width: 2000,
+            height: 1158,
             alt: 'Gwork 对话主界面',
             caption: '底部输入框，右侧是添加图片、添加附件和发送',
           },
@@ -397,6 +401,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-subagent.png',
+            width: 2000,
+            height: 1158,
             alt: '派发智能体后的状态行与详情弹窗',
             caption: '状态行实时显示进展，点开可看完整过程',
           },
@@ -496,6 +502,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-task-breakdown.png',
+            width: 2000,
+            height: 1158,
             alt: '右侧任务清单面板：步骤逐项打勾，顶部有进度条',
             caption: '拆好的步骤实时勾画进度，做到哪一步一目了然',
           },
@@ -537,6 +545,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-right-panel.png',
+            width: 2000,
+            height: 1158,
             alt: '右侧文件面板：文件结果卡片与任务清单',
             caption: 'Gwork 产出的文件自动收进「文件结果」，点开即看',
           },
@@ -582,6 +592,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-left-tree-menu.png',
+            width: 2000,
+            height: 1066,
             alt: '左侧文件树与右键菜单',
             caption: '轻点加附件、双击看内容、右键找更多',
           },
@@ -634,12 +646,6 @@ export const MANUAL_PARTS: ManualPart[] = [
                 desc: '「设置 → 关于」的卡片上写着「版本 0.9.17」（后面括号里是构建编号，不影响使用），设置窗口左下角也能看到版本号；下方「更新记录」列出每个版本的改进内容，条数多时点「展开更多」看全。',
               },
             ],
-          },
-          {
-            kind: 'image',
-            src: 'screenshots/guide-update-ready.png',
-            alt: '关于页提示新版本已就绪，版本号旁有「点击更新」按钮',
-            caption: '下载完成后，点版本号旁的「点击更新」重启安装',
           },
           {
             kind: 'tip',
