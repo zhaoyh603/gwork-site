@@ -1,13 +1,14 @@
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import CtaButton from '../components/CtaButton';
-import SectionTitle from '../components/SectionTitle';
-import { CONSULT_OPTIONS, GUIDE_SECTIONS, INSTALL_STEPS } from '../data/guide';
+import GuideToc from '../components/GuideToc';
+import ManualSectionView from '../components/ManualSectionView';
+import { CONSULT_OPTIONS } from '../data/guide';
+import { MANUAL_BASELINE_VERSION, MANUAL_PARTS } from '../data/manual';
 import { SITE } from '../data/site';
 import { useReveal } from '../hooks/useReveal';
-import type { CSSProperties } from 'react';
 
-/** 安装指南页：承接下载后的上手路径、排查要点和咨询反馈入口。 */
+/** 配置指南页：装好之后的完整上手手册——四大板块图文操作步骤。 */
 export default function Guide() {
   const revealRef = useReveal<HTMLDivElement>();
 
@@ -17,60 +18,32 @@ export default function Guide() {
       <main className="mx-auto max-w-6xl px-6 py-16">
         <div className="reveal surface-card-soft px-8 py-14 text-center lg:px-16">
           <p className="mb-4">
-            <span className="eyebrow-pill tracking-wide">安装指南</span>
+            <span className="eyebrow-pill tracking-wide">配置指南</span>
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">
-            从下载、配置到第一次跑起来
+            装好之后，从这里开始
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">
-            这份指南聚焦桌面端的首次使用流程，帮助你更快完成安装、模型配置和初始排查。
+            这份手册带你完成模型配置、建好知识库、用上各项功能。还没安装？
+            <a href="./download.html" className="text-link">先去下载页 →</a>
           </p>
+          <p className="mt-2 text-xs text-ink-soft">界面以 v{MANUAL_BASELINE_VERSION} 为准 · 截图均为浅色主题，不影响深色模式下的操作</p>
         </div>
 
-        <section className="mt-16">
-          <SectionTitle
-            kicker="安装流程"
-            title="五步完成首次上手"
-            desc="建议先按标准流程走一遍，再根据自身网络和模型环境做细化配置。"
-          />
-
-          <div className="grid gap-5 lg:grid-cols-5">
-            {INSTALL_STEPS.map((step, index) => (
-              <article
-                key={step.no}
-                className="reveal surface-card px-5 py-6"
-                style={{ '--reveal-delay': `${index * 70}ms` } as CSSProperties}
-              >
-                <p className="text-sm font-semibold text-brand">{step.no}</p>
-                <h2 className="mt-3 text-lg font-semibold text-brand-dark">{step.title}</h2>
-                <p className="mt-3 text-sm leading-7 text-ink-soft">{step.desc}</p>
-              </article>
+        <div className="mt-16 flex flex-col gap-10 lg:flex-row">
+          <GuideToc parts={MANUAL_PARTS} />
+          <div className="min-w-0 flex-1">
+            {MANUAL_PARTS.map((part) => (
+              <section key={part.id} id={part.id} className="scroll-mt-24">
+                <h2 className="text-3xl font-semibold tracking-tight text-brand-dark">{part.title}</h2>
+                <p className="mt-3 text-base leading-relaxed text-ink-soft">{part.intro}</p>
+                {part.sections.map((section) => (
+                  <ManualSectionView key={section.id} section={section} />
+                ))}
+              </section>
             ))}
           </div>
-        </section>
-
-        <section className="mt-16 grid gap-6 lg:grid-cols-2">
-          {GUIDE_SECTIONS.map((section, index) => (
-            <article
-              key={section.title}
-              className="reveal feature-showcase overflow-hidden rounded-[32px] border border-white/80 px-6 py-8 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm"
-              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-            >
-              <div className="feature-showcase__wash" />
-              <div className="relative z-[1]">
-                <h2 className="text-2xl font-semibold tracking-tight text-brand-dark">{section.title}</h2>
-                <p className="mt-3 text-sm leading-7 text-ink-soft">{section.desc}</p>
-                <div className="mt-5 space-y-3">
-                  {section.items.map((item) => (
-                    <div key={item} className="rounded-2xl border border-white/80 bg-white/80 px-4 py-3 shadow-sm">
-                      <p className="text-sm leading-6 text-ink">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
+        </div>
 
         <section id="consult" className="reveal mt-16 rounded-[32px] border border-white/80 bg-white/80 px-8 py-10 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
