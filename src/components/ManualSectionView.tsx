@@ -50,6 +50,11 @@ function BlockView({ block }: { block: ManualBlock }) {
           ))}
         </div>
       );
+    default: {
+      // 穷尽性守卫：manual.ts 新增 block 类型而此处漏渲染时，编译期即报错而非线上内容静默消失
+      const _exhaustive: never = block;
+      return _exhaustive;
+    }
   }
 }
 
