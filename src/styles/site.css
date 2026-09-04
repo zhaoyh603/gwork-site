@@ -498,6 +498,15 @@ body {
   }
 }
 
+/* 隐藏滚动条：目录移动端横滑条等——内容仍可滑，仅去掉视觉滚动条 */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
