@@ -26,6 +26,9 @@ export interface ImageBlock {
   src: string;
   alt: string;
   caption?: string;
+  /** 图片实际像素尺寸：img 尺寸预留，防懒加载时布局偏移（CLS）。截图采集时填实际值。 */
+  width?: number;
+  height?: number;
 }
 
 export interface TipBlock {

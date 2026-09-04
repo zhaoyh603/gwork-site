@@ -9,7 +9,7 @@ function BlockView({ block }: { block: ManualBlock }) {
       return (
         <ol className="mt-5 space-y-3">
           {block.items.map((step, index) => (
-            <li key={step.title} className="flex gap-4 rounded-2xl border border-white/80 bg-white/80 px-4 py-3 shadow-sm">
+            <li key={`${index}-${step.title}`} className="flex gap-4 rounded-2xl border border-white/80 bg-white/80 px-4 py-3 shadow-sm">
               <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
                 {index + 1}
               </span>
@@ -24,7 +24,7 @@ function BlockView({ block }: { block: ManualBlock }) {
     case 'image':
       return (
         <figure className="mt-5">
-          <img src={block.src} alt={block.alt} loading="lazy" className="w-full rounded-2xl border border-white/80 shadow-[0_16px_36px_rgba(19,40,110,0.10)]" />
+          <img src={block.src} alt={block.alt} loading="lazy" width={block.width} height={block.height} className="w-full rounded-2xl border border-white/80 shadow-[0_16px_36px_rgba(19,40,110,0.10)]" />
           {block.caption ? <figcaption className="mt-2 text-center text-xs text-ink-soft">{block.caption}</figcaption> : null}
         </figure>
       );
@@ -37,15 +37,15 @@ function BlockView({ block }: { block: ManualBlock }) {
     case 'links':
       return (
         <div className="mt-4 flex flex-wrap gap-3">
-          {block.items.map((link) => (
+          {block.items.map((link, index) => (
             <a
-              key={link.href}
+              key={`${index}-${link.href}`}
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noreferrer' : undefined}
-              className="text-link text-sm font-medium"
+              className="text-link text-sm"
             >
-              {link.label}{link.external ? ' ↗' : ''}
+              {link.label}{link.external ? <span aria-hidden="true"> ↗</span> : ''}
             </a>
           ))}
         </div>
@@ -61,7 +61,7 @@ function BlockView({ block }: { block: ManualBlock }) {
 /** 手册小节：标题 + block 序列。 */
 export default function ManualSectionView({ section }: { section: ManualSection }) {
   return (
-    <article id={section.id} className="scroll-mt-24 mt-12 border-t border-white/80 pt-10 first:border-t-0">
+    <article id={section.id} className="scroll-mt-24 mt-12 border-t border-white/80 pt-10 first-of-type:border-t-0">
       <h3 className="text-xl font-semibold tracking-tight text-brand-dark">{section.title}</h3>
       {section.blocks.map((block, index) => (
         <BlockView key={index} block={block} />
