@@ -169,7 +169,7 @@ export default function Download() {
                 ))}
               </div>
               <div className="mt-5 flex flex-wrap gap-4">
-                <a href="./guide.html" className="text-link inline-flex items-center text-base">查看完整安装指南 →</a>
+                <a href="./guide.html" className="text-link inline-flex items-center text-base">查看配置指南 →</a>
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default function Download() {
             <div>
               <h2 className="text-xl font-semibold text-brand-dark">咨询 / 反馈入口</h2>
               <p className="mt-3 text-sm leading-relaxed text-ink">
-                如果你是政企试用、内网部署或采购前评估场景，建议先看典型场景和安装指南；
+                如果你是政企试用、内网部署或采购前评估场景，建议先看典型场景和配置指南；
                 如果已经遇到安装问题或使用异常，可直接进入反馈入口提交信息。
               </p>
               <div className="mt-6 flex flex-wrap gap-4">
@@ -236,7 +236,7 @@ export default function Download() {
           <h2 className="text-xl font-semibold text-brand-dark">版本说明</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink">
             当前版本 {version}，已提供 macOS 双架构与 Windows 64 位安装包；
-            若你更关心首次部署、模型配置或权限说明，建议先阅读安装指南。
+            若你更关心首次部署、模型配置或权限说明，建议先阅读配置指南。
           </p>
         </section>
       </main>
