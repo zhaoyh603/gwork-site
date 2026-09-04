@@ -16,21 +16,7 @@ export default function Guide() {
     <div className="site-shell" ref={revealRef}>
       <Nav active="guide" />
       <main className="mx-auto max-w-6xl px-6 py-16">
-        <div className="reveal surface-card-soft px-8 py-14 text-center lg:px-16">
-          <p className="mb-4">
-            <span className="eyebrow-pill tracking-wide">配置指南</span>
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">
-            装好之后，从这里开始
-          </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">
-            这份手册带你完成模型配置、建好知识库、用上各项功能。还没安装？
-            <a href="./download.html" className="text-link">先去下载页 →</a>
-          </p>
-          <p className="mt-2 text-xs text-ink-soft">界面以 v{MANUAL_BASELINE_VERSION} 为准 · 截图均为浅色主题，不影响深色模式下的操作</p>
-        </div>
-
-        <div className="mt-16 flex flex-col gap-10 lg:flex-row">
+        <div className="flex flex-col gap-10 lg:flex-row">
           <GuideToc parts={MANUAL_PARTS} />
           <div className="min-w-0 flex-1">
             {MANUAL_PARTS.map((part) => (
@@ -44,6 +30,10 @@ export default function Guide() {
             ))}
           </div>
         </div>
+
+        <p className="mt-16 text-center text-xs text-ink-soft">
+          本指南界面以 v{MANUAL_BASELINE_VERSION} 为准 · 截图均为浅色主题，不影响深色模式下的操作
+        </p>
 
         <section id="consult" className="reveal mt-16 rounded-[32px] border border-white/80 bg-white/80 px-8 py-10 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
