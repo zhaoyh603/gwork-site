@@ -3,7 +3,7 @@ import { SITE } from '../data/site';
 const FOOTER_LINKS = [
   { label: '功能', href: './features.html' },
   { label: '场景', href: './scenarios.html' },
-  { label: '配置指南', href: './guide.html' },
+  { label: '使用指南', href: './guide.html' },
 ] as const;
 
 /** 页脚：承接品牌信息和对外链接，保持与页面整体视觉一致。 */

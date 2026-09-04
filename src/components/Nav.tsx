@@ -7,7 +7,7 @@ export type NavActive = 'home' | 'features' | 'scenarios' | 'guide' | 'download'
 const LINKS: Array<{ key: Exclude<NavActive, 'home'>; label: string; href: string }> = [
   { key: 'features', label: '功能', href: './features.html' },
   { key: 'scenarios', label: '场景', href: './scenarios.html' },
-  { key: 'guide', label: '配置指南', href: './guide.html' },
+  { key: 'guide', label: '使用指南', href: './guide.html' },
 ];
 
 /** 顶部导航：统一品牌露出、当前页态与下载入口。 */

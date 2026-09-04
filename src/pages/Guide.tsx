@@ -9,7 +9,7 @@ import { MANUAL_BASELINE_VERSION, MANUAL_PARTS } from '../data/manual';
 import { SITE } from '../data/site';
 import { useReveal } from '../hooks/useReveal';
 
-/** 配置指南页：装好之后的完整上手手册——四大板块图文操作步骤。 */
+/** 使用指南页：装好之后的完整上手手册——四大板块图文操作步骤。 */
 export default function Guide() {
   const revealRef = useReveal<HTMLDivElement>();
 
