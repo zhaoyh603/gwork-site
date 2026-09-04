@@ -148,8 +148,8 @@ export const MANUAL_PARTS: ManualPart[] = [
                 desc: '点窗口底部的「测试」，Gwork 会用这套配置实际发一条消息验证能不能连通；显示正常后点「保存」。',
               },
               {
-                title: '设为当前',
-                desc: '保存后回到供应商列表，新加的供应商还没有启用，点它右侧的「设为当前」，卡片上出现「当前使用」标记即可。',
+                title: '确认已启用',
+                desc: '保存后回到供应商列表，如果卡片上已经有「当前使用」标记，配置就完成了；如果还没有（比如你添加了多个服务商），点卡片右侧的「设为当前」。',
               },
               {
                 title: '发一句「你好」试试',
@@ -160,6 +160,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-config-model.png',
+            width: 2000,
+            height: 1158,
             alt: 'Gwork 模型配置页',
             caption: '在模型配置页填入密钥与服务信息',
           },
@@ -205,6 +207,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-vision-toggle.png',
+            width: 2000,
+            height: 1158,
             alt: '模型设置中的多模态开关',
             caption: '拿不准时，在供应商编辑窗口的「角色映射」里勾选「多模态」',
           },
@@ -276,6 +280,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-kb-create.png',
+            width: 2000,
+            height: 1158,
             alt: '知识库创建向导',
             caption: '两步向导：选文件夹 → 确认名称',
           },
@@ -443,6 +449,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-editor.png',
+            width: 2000,
+            height: 1158,
             alt: 'Markdown 编辑器：顶部工具栏与正文编辑区',
             caption: '双击 .md 文件打开，改动自动保存回原文件',
           },
@@ -679,6 +687,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-security-settings.png',
+            width: 2000,
+            height: 1158,
             alt: '安全中心页：左侧沙箱安全卡片，右侧数据安全卡片',
             caption: '安全中心分「沙箱安全」「数据安全」两块，默认即按稳妥方式开启',
           },
@@ -724,6 +734,8 @@ export const MANUAL_PARTS: ManualPart[] = [
           {
             kind: 'image',
             src: 'screenshots/guide-env-check.png',
+            width: 2000,
+            height: 1158,
             alt: '环境自检弹窗：逐项显示检测结果的绿勾与红叉',
             caption: '打开即自动检测，绿勾正常、红叉缺失',
           },
