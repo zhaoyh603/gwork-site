@@ -12,7 +12,7 @@ max_tokens: 4000
 
 ## 主要业务
 
-开发并维护 Gwork（AI 政企办公助手）产品官网，多页面静态站（Vite + React + Tailwind），内容覆盖功能、场景、FAQ、下载与安装指南，并自动部署到 GitHub Pages。
+开发并维护 Gwork（AI 政企办公助手）产品官网，多页面静态站（Vite + React + Tailwind），内容覆盖功能、场景、FAQ、下载与配置指南，并自动部署到 GitHub Pages。
 
 ## 工作角色
 
