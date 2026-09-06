@@ -41,10 +41,10 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
     } as CSSProperties,
   },
   '02': {
-    label: '协同编排',
-    metricValue: '多线程推进',
+    label: '统筹分工',
+    metricValue: '几件事同时跑',
     metricLabel: '主助手统筹 + 子助手执行',
-    highlights: ['任务拆解', '并行执行', '自动汇总'],
+    highlights: ['拆解任务', '同时推进', '自动汇总'],
     style: {
       '--feature-accent': '#4e8cff',
       '--feature-soft-start': 'rgba(78, 140, 255, 0.15)',
@@ -54,8 +54,8 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
   },
   '03': {
     label: '本地安全',
-    metricValue: '本地优先',
-    metricLabel: '适配内网模型与敏感资料场景',
+    metricValue: '资料不出本机',
+    metricLabel: '内网模型、敏感资料都能用',
     highlights: ['本地工作区', '内网可用', '上下文可控'],
     style: {
       '--feature-accent': '#3277d8',
@@ -68,7 +68,7 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
     label: '插件扩展',
     metricValue: '按需启用',
     metricLabel: '网页 / 文件 / 邮件 / 定时任务',
-    highlights: ['组件化', '可扩展', '低负担'],
+    highlights: ['想要就开', '不用就关', '不占地方'],
     style: {
       '--feature-accent': '#6b7cff',
       '--feature-soft-start': 'rgba(107, 124, 255, 0.16)',
@@ -80,7 +80,7 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
     label: '模型接入',
     metricValue: '灵活切换',
     metricLabel: '支持多家主流模型厂商',
-    highlights: ['国产兼容', '成本可控', '按场景选型'],
+    highlights: ['国产模型都能接', '花多少钱自己定', '按用途挑'],
     style: {
       '--feature-accent': '#5f74ff',
       '--feature-soft-start': 'rgba(95, 116, 255, 0.16)',
@@ -89,10 +89,10 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
     } as CSSProperties,
   },
   '06': {
-    label: '空间隔离',
+    label: '分区办公',
     metricValue: '多工作区',
-    metricLabel: '项目与部门上下文独立',
-    highlights: ['切换便捷', '上下文隔离', '项目并行'],
+    metricLabel: '项目与部门各管各的',
+    highlights: ['切换快', '互不干扰', '多项目并行'],
     style: {
       '--feature-accent': '#4f90f7',
       '--feature-soft-start': 'rgba(79, 144, 247, 0.14)',
@@ -101,7 +101,7 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
     } as CSSProperties,
   },
   '07': {
-    label: '知识增强',
+    label: '知识库问答',
     metricValue: '来源可追溯',
     metricLabel: '问答结果附引用依据',
     highlights: ['制度检索', '条文引用', '快速问答'],
@@ -114,8 +114,8 @@ const FEATURE_PRESENTATIONS: Record<string, FeaturePresentation> = {
   },
   '08': {
     label: '安全中心',
-    metricValue: '策略 + 审计',
-    metricLabel: '命令、文件、网络与删除全链路更可控',
+    metricValue: '有规矩，有记录',
+    metricLabel: '命令、文件、联网、删除，样样管得住',
     highlights: ['命令审批', '网络规则', '删除保护'],
     style: {
       '--feature-accent': '#2f6fda',
@@ -138,14 +138,6 @@ export default function Features() {
     <div className="site-shell" ref={revealRef}>
       <Nav active="features" />
       <main className="mx-auto max-w-6xl px-6 py-16">
-        <div className="reveal surface-card-soft mb-16 px-8 py-14 text-center lg:px-16">
-          <p className="mb-4">
-            <span className="eyebrow-pill tracking-wide">功能一览</span>
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">{FEATURES.length} 项核心能力，覆盖办公与安全控制</h1>
-          <p className="mt-4 text-base text-ink-soft">不仅能做事，也把本地安全、联网控制和审计回溯一起考虑进去了。</p>
-        </div>
-
         {FEATURES.map((f, i) => {
           const presentation = getFeaturePresentation(f.no);
           return (
@@ -187,7 +179,7 @@ export default function Features() {
                 <div className="feature-preview-frame">
                   <div className="feature-preview-badge">
                     <span className="feature-preview-dot" />
-                    已接入场景能力
+                    界面示意
                   </div>
                   <ScreenMock variant={MOCK_BY_NO[f.no] ?? 'workspace'} mode="feature" />
                 </div>
@@ -199,10 +191,10 @@ export default function Features() {
         <section className="reveal mt-16 rounded-[32px] border border-white/80 bg-white/85 p-8 shadow-[0_18px_40px_rgba(19,40,110,0.08)] backdrop-blur-sm">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold text-brand">安全机制</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-brand-dark">安全不是一句“数据在本地”，而是多层保护一起工作</h2>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-brand-dark">“数据在本地”只是一层，多层保护一起才放心</h2>
             <p className="mt-4 text-base leading-relaxed text-ink-soft">
-              结合主项目现有机制，Gwork 已经覆盖命令审批、文件路径限制、网络规则、删除保护和审计回溯等多层防护，
-              更适合让 AI 在真实工作区里长期运行。
+              命令要先批准、文件访问有边界、联网有规矩、删除有保护，每一步都留记录——
+              让 AI 在你的电脑里长期干活，你管得住。
             </p>
           </div>
 
