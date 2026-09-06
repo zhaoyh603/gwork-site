@@ -24,6 +24,11 @@ body {
     @apply min-h-screen text-ink;
   }
 
+  /* 典故/引文专用衬线字体栈，零 webfont 加载 */
+  .font-classic {
+    font-family: 'Kaiti SC', 'STKaiti', 'KaiTi', 'Songti SC', 'STSong', 'SimSun', serif;
+  }
+
   .glass-nav {
     background: rgba(255, 255, 255, 0.72);
     box-shadow: 0 10px 30px rgba(19, 40, 110, 0.08);

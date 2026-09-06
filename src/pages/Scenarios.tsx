@@ -1,7 +1,6 @@
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import CtaButton from '../components/CtaButton';
-import SectionTitle from '../components/SectionTitle';
 import { SCENARIOS } from '../data/scenarios';
 import { useReveal } from '../hooks/useReveal';
 import type { CSSProperties } from 'react';
@@ -14,26 +13,7 @@ export default function Scenarios() {
     <div className="site-shell" ref={revealRef}>
       <Nav active="scenarios" />
       <main className="mx-auto max-w-6xl px-6 py-16">
-        <div className="reveal surface-card-soft px-8 py-14 text-center lg:px-16">
-          <p className="mb-4">
-            <span className="eyebrow-pill tracking-wide">典型场景</span>
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">
-            不是“能做什么”，而是“落地后怎么用”
-          </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">
-            Gwork 面向政企办公场景，重点解决公文写作、知识问答、材料整理与定时任务等高频问题。
-            先看清典型流程，再判断是否适合你的团队。
-          </p>
-        </div>
-
-        <section className="mt-16">
-          <SectionTitle
-            kicker="场景总览"
-            title="四个高频落地方向"
-            desc="从日常办公到敏感资料处理，都围绕“本地优先、任务协同、资料可追溯”展开。"
-          />
-
+        <section>
           <div className="grid gap-6">
             {SCENARIOS.map((scenario, index) => (
               <section
@@ -87,7 +67,7 @@ export default function Scenarios() {
                     <div className="mt-6 rounded-[24px] border border-brand-glow bg-surface-soft px-5 py-5">
                       <p className="text-sm font-semibold text-brand-dark">推荐起步方式</p>
                       <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                        先挑一个最常见、最容易衡量结果的任务开始，例如起草一份通知、检索一份制度或整理一个资料包。
+                        先挑一件最日常的小事试手：起草一份通知、查一条制度、整理一包资料。
                       </p>
                     </div>
                   </div>
@@ -98,8 +78,8 @@ export default function Scenarios() {
         </section>
 
         <section className="reveal py-16 text-center">
-          <h2 className="text-2xl font-semibold text-brand-dark">想进一步确认是否适合你的业务？</h2>
-          <p className="mt-3 text-base text-ink-soft">可以先看使用指南，再决定试用方式。</p>
+          <h2 className="text-2xl font-semibold text-brand-dark">拿不准适不适合你的活儿？</h2>
+          <p className="mt-3 text-base text-ink-soft">先翻翻使用指南，再决定装不装。</p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <CtaButton href="./guide.html">查看使用指南</CtaButton>
           </div>

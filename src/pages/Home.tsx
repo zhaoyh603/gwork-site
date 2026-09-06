@@ -8,7 +8,7 @@ import { SCENARIOS } from '../data/scenarios';
 import { useReveal } from '../hooks/useReveal';
 import type { CSSProperties } from 'react';
 
-const HERO_HIGHLIGHTS = ['按体例起草公文', '回答带出处', '数据留在本机', '支持 macOS 与 Windows'];
+const HERO_HIGHLIGHTS = ['按体例起草公文', '回答带出处', '到点自动执行', '支持 macOS 与 Windows'];
 const HERO_FLOATING_CARD = {
   title: '通知初稿',
   value: '已按公文体例起草',
@@ -42,8 +42,14 @@ export default function Home() {
               className="hero-rise mt-6 max-w-xl text-lg leading-relaxed text-ink-soft lg:text-xl"
               style={{ animationDelay: '240ms' }}
             >
-              公文起草、材料整理、制度问答、周报汇总——不是聊天式问答，而是按政企工作习惯交付：
-              按体例起草、带出处回答、到点自动执行。数据留在本机，模型可接内网，无需注册、无需积分。
+              公文起草、材料整理、制度问答、周报汇总——不是聊天式问答，而是按政企工作习惯交付结果。
+              数据留在本机，模型可接内网，无需注册、无需积分。
+            </p>
+            <p
+              className="hero-rise font-classic mt-5 text-lg tracking-[0.15em] text-brand-dark/75"
+              style={{ animationDelay: '300ms' }}
+            >
+              “君子生非异也，善假于物也。”——《荀子·劝学》
             </p>
             <div className="hero-rise mt-8 flex flex-wrap items-center gap-4" style={{ animationDelay: '360ms' }}>
               <CtaButton href="./download.html" size="lg">下载 Gwork</CtaButton>
@@ -95,7 +101,8 @@ export default function Home() {
           <SectionTitle
             kicker="典型场景"
             title="从案头到交付，办公的事都交给我"
-            desc="四个高频场景，覆盖政企办公日常。"
+            desc="四个场景，对照你的日常"
+            motto="下笔千言，倚马可待"
           />
           <div className="grid gap-5 lg:grid-cols-2">
             {SCENARIOS.map((s, i) => (
@@ -124,7 +131,8 @@ export default function Home() {
           <SectionTitle
             kicker="核心能力"
             title="一个助手，承包办公日常"
-            desc="从公文写作到知识库问答，从单打独斗到多助手协同，都能帮上忙。"
+            desc="八项能力，按需取用"
+            motto="工欲善其事，必先利其器"
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f, i) => {
@@ -151,7 +159,8 @@ export default function Home() {
           <SectionTitle
             kicker="协同工作"
             title="多助手一起干活，各司其职"
-            desc="主助手负责统筹，子助手按任务分工，定时任务自动跑，跨标签页随时调用。"
+            desc="拆开并行，结果交回你手上"
+            motto="运筹帷幄之中，决胜千里之外"
           />
           <div className="grid gap-6 lg:grid-cols-3">
             {[
@@ -178,7 +187,8 @@ export default function Home() {
           <SectionTitle
             kicker="安全可控"
             title="数据不出门，用着放心"
-            desc="面向政企场景，安全是底线不是卖点。"
+            desc="安全是底线，不是卖点"
+            motto="人有不为也，而后可以有为"
           />
           <div className="grid gap-6 lg:grid-cols-3">
             {[
@@ -207,7 +217,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="reveal surface-card-soft px-8 py-14 text-center lg:px-16">
             <h2 className="text-3xl font-semibold text-brand-dark">现在就试试 Gwork</h2>
-            <p className="mt-4 text-base text-ink-soft">免费安装，本地运行，两分钟上手。</p>
+            <p className="mt-4 text-base text-ink-soft">安装即用，两分钟上手。</p>
             <div className="mt-8">
               <CtaButton href="./download.html" size="lg">下载 Gwork</CtaButton>
             </div>
