@@ -55,7 +55,6 @@ const REQUIREMENTS: Array<[string, string]> = [
   ['操作系统', 'macOS 12 及以上 / Windows 10 及以上'],
   ['内存', '8 GB 及以上'],
   ['硬盘空间', '2 GB 可用空间'],
-  ['网络', '首次配置模型时需联网，日常可离线使用'],
 ];
 
 /**
