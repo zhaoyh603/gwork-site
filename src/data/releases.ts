@@ -20,7 +20,8 @@ export interface ReleaseLogItem {
   items: string[];
 }
 
-const UPDATE_BASE = 'https://updates.oeerp.com';
+/** 更新服务基址：安装包与版本清单的发布地（发版流程 SSOT），官网同源读取。 */
+export const UPDATE_BASE = 'https://updates.gworkai.cn';
 
 export interface ReleaseFile {
   /** 相对文件名。 */
