@@ -10,13 +10,13 @@ export const CONSULT_OPTIONS = [
   {
     title: '提交需求',
     desc: '适合整理业务背景、部门场景、数据安全要求与现有流程后统一反馈。',
-    action: '提交 Issue / 需求',
-    href: SITE.issuesUrl,
+    action: '邮件提交需求',
+    href: SITE.contactUrl,
   },
   {
     title: '问题反馈',
     desc: '安装报错、模型接入异常或使用问题，建议附上系统版本、截图与复现步骤。',
-    action: '前往反馈入口',
-    href: SITE.issuesUrl,
+    action: '邮件反馈',
+    href: SITE.contactUrl,
   },
 ] as const;

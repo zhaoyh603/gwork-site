@@ -192,11 +192,6 @@ export default function Download() {
               </article>
             ))}
           </div>
-          <p className="mt-5 text-sm text-ink-soft">
-            更完整的发布记录可在
-            <a className="text-link" href={SITE.releaseUrl}> GitHub Releases</a>
-            查看。
-          </p>
         </section>
 
         <section className="reveal mt-10 rounded-[32px] border border-white/80 bg-white/85 p-8 shadow-[0_18px_40px_rgba(19,40,110,0.08)] backdrop-blur-sm">
@@ -210,7 +205,7 @@ export default function Download() {
               <div className="mt-6 flex flex-wrap gap-4">
                 <a href="./scenarios.html" className="text-link inline-flex items-center text-base">查看典型场景 →</a>
                 <a href="./guide.html#consult" className="text-link inline-flex items-center text-base">咨询与安装说明 →</a>
-                <a href={SITE.issuesUrl} className="text-link inline-flex items-center text-base">提交问题反馈 →</a>
+                <a href={SITE.contactUrl} className="text-link inline-flex items-center text-base">联系我们 →</a>
               </div>
             </div>
 

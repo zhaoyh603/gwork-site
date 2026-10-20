@@ -41,3 +41,4 @@ pnpm build && pnpm exec vite preview
 | 场景 | `scenarios.html` |
 | 使用指南（面向用户） | `guide.html` |
 | 下载 | `download.html` |
+| 联系我们 | `contact.html`（`src/main-contact.tsx`） |

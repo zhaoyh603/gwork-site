@@ -4,6 +4,7 @@ const FOOTER_LINKS = [
   { label: '功能', href: './features.html' },
   { label: '场景', href: './scenarios.html' },
   { label: '使用指南', href: './guide.html' },
+  { label: '联系我们', href: './contact.html' },
 ] as const;
 
 /** 页脚：承接品牌信息和对外链接，保持与页面整体视觉一致。 */
@@ -24,13 +25,6 @@ export default function Footer() {
               {link.label}
             </a>
           ))}
-          {SITE.docsUrl ? (
-            <a href={SITE.docsUrl} className="transition-colors hover:text-brand-dark">文档</a>
-          ) : null}
-          {SITE.github ? (
-            <a href={SITE.github} className="transition-colors hover:text-brand-dark">GitHub</a>
-          ) : null}
-          <a href={SITE.issuesUrl} className="transition-colors hover:text-brand-dark">问题反馈</a>
         </div>
       </div>
     </footer>

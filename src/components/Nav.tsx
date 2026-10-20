@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SITE } from '../data/site';
 import CtaButton from './CtaButton';
 
-export type NavActive = 'home' | 'features' | 'scenarios' | 'guide' | 'download';
+export type NavActive = 'home' | 'features' | 'scenarios' | 'guide' | 'download' | 'contact';
 
 const LINKS: Array<{ key: Exclude<NavActive, 'home'>; label: string; href: string }> = [
   { key: 'features', label: '功能', href: './features.html' },

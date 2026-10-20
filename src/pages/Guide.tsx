@@ -55,7 +55,7 @@ export default function Guide() {
             </div>
             <div className="flex flex-wrap gap-4">
               <CtaButton href="./download.html">前往下载页</CtaButton>
-              <a href={SITE.issuesUrl} className="text-link inline-flex items-center text-base">进入问题反馈 →</a>
+              <a href={SITE.contactUrl} className="text-link inline-flex items-center text-base">联系我们 →</a>
             </div>
           </div>
 
