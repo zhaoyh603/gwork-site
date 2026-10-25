@@ -38,14 +38,14 @@ const PLATFORM_LABEL: Record<PlatformKey, string> = { mac: 'macOS', win: 'Window
 const PLATFORM_META: Record<PlatformKey, string> = {
   mac: 'macOS 12 及以上',
   win: 'Windows 10 及以上',
-  linux: 'Ubuntu 20.04+ / Debian 10+ / 统信 UOS 20 / 银河麒麟 V10 · 仅 x86_64（Intel/AMD）',
+  linux: 'Ubuntu 20.04+ / Debian 10+ / 统信 UOS 20 / 银河麒麟 V10 · 仅 x86_64 架构',
 };
 
 const REQUIREMENTS: Array<[string, string]> = [
   ['操作系统', 'macOS 12 及以上 / Windows 10 及以上 / Ubuntu 20.04+、Debian 10+、统信 UOS 20、银河麒麟 V10（x86_64）'],
   ['内存', '8 GB 及以上'],
   ['硬盘空间', '2 GB 可用空间'],
-  ['Linux 机型', '仅 x86_64（Intel / AMD）；飞腾、鲲鹏（ARM）与龙芯机型暂不支持'],
+  ['Linux CPU', '支持 x86_64 架构：Intel、AMD、海光、兆芯；暂不支持飞腾、鲲鹏（ARM）与龙芯'],
 ];
 
 /**
@@ -138,7 +138,7 @@ export default function Download() {
               <p className="font-serif text-2xl text-brand-dark">{PLATFORM_LABEL[platform]}</p>
               <p className="mt-1 text-sm text-ink-soft">{PLATFORM_META[platform]}</p>
               {platform === 'linux' ? (
-                <p className="mt-1 text-xs text-ink-muted">飞腾 / 鲲鹏（ARM）与龙芯机型暂不支持</p>
+                <p className="mt-1 text-xs text-ink-muted">CPU 需为 x86_64：Intel、AMD、海光、兆芯；飞腾、鲲鹏（ARM）与龙芯暂不支持</p>
               ) : null}
               {platform === 'mac' && macVariants.length > 1 ? (
                 <label className="mt-4 block">
@@ -185,7 +185,7 @@ export default function Download() {
                     <p className="font-medium text-brand-dark">{PLATFORM_LABEL[p]}</p>
                     <p className="mt-0.5 text-sm text-ink-soft">{PLATFORM_META[p]}</p>
                     {p === 'linux' ? (
-                      <p className="mt-0.5 text-xs text-ink-muted">飞腾 / 鲲鹏（ARM）与龙芯机型暂不支持</p>
+                      <p className="mt-0.5 text-xs text-ink-muted">CPU 需为 x86_64：Intel、AMD、海光、兆芯；飞腾、鲲鹏（ARM）与龙芯暂不支持</p>
                     ) : null}
                   </div>
                   {artifact ? (
