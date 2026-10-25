@@ -10,10 +10,10 @@ const FOOTER_LINKS = [
 /** 页脚：承接品牌信息和对外链接，保持与页面整体视觉一致。 */
 export default function Footer() {
   return (
-    <footer className="border-t border-white/70 bg-white/70 py-10 backdrop-blur-sm">
+    <footer className="border-t border-line bg-paper py-10">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/80 bg-white shadow-sm">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-white">
             <img src="./icon.png" alt="Gwork 图标" className="h-5 w-5 rounded" />
           </div>
           <span className="text-sm text-ink-soft">© 2026 {SITE.name}。保留所有权利。</span>

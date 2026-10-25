@@ -1,8 +1,13 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-import SectionTitle from '../components/SectionTitle';
 import ContactEmail from '../components/ContactEmail';
 import { useReveal } from '../hooks/useReveal';
+
+const CONTACT_NOTES = [
+  '安装或使用问题：请附上系统版本、Gwork 版本和复现步骤。',
+  '功能建议：请说明使用场景和期望效果。',
+  '邮件仅用于回复你的问题，不会公开。',
+];
 
 /** 联系我们：提供邮箱入口与写信前的信息说明。 */
 export default function Contact() {
@@ -11,22 +16,26 @@ export default function Contact() {
   return (
     <div className="site-shell" ref={revealRef}>
       <Nav active="contact" />
-      <main className="mx-auto max-w-6xl px-6 py-16">
-        <div className="reveal surface-card-soft px-8 py-14 text-center">
-          <SectionTitle
-            kicker="联系我们"
-            title="有问题或建议？"
-            desc="发邮件给我们，我们会尽快回复。"
-          />
-          <div className="mx-auto max-w-xl">
+      <main className="mx-auto max-w-5xl px-6 py-16">
+        <section className="reveal">
+          <p className="text-xs uppercase tracking-[0.14em] text-brand">联系我们</p>
+          <h1 className="mt-3 font-serif text-4xl leading-tight text-brand-dark lg:text-5xl">有问题或建议？</h1>
+          <p className="mt-4 max-w-xl text-base leading-7 text-ink-soft">发邮件给我们，我们会尽快回复。</p>
+        </section>
+
+        <section className="reveal mt-14 border-t border-line pt-10">
+          <div className="rounded-xl border border-line p-8">
             <ContactEmail />
-            <ul className="mt-10 space-y-3 text-left text-sm leading-relaxed text-ink-soft">
-              <li>安装或使用问题：请附上系统版本、Gwork 版本和复现步骤。</li>
-              <li>功能建议：请说明使用场景和期望效果。</li>
-              <li>邮件仅用于回复你的问题，不会公开。</li>
-            </ul>
           </div>
-        </div>
+
+          <ul className="mt-10 border-t border-line">
+            {CONTACT_NOTES.map((note) => (
+              <li key={note} className="border-b border-line py-4 text-sm leading-6 text-ink-soft">
+                {note}
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
       <Footer />
     </div>

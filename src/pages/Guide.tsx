@@ -5,7 +5,7 @@ import CtaButton from '../components/CtaButton';
 import GuideToc from '../components/GuideToc';
 import ManualSectionView from '../components/ManualSectionView';
 import { CONSULT_OPTIONS } from '../data/guide';
-import { MANUAL_BASELINE_VERSION, MANUAL_PARTS } from '../data/manual';
+import { MANUAL_PARTS } from '../data/manual';
 import { SITE } from '../data/site';
 import { useReveal } from '../hooks/useReveal';
 
@@ -24,14 +24,22 @@ export default function Guide() {
   return (
     <div className="site-shell" ref={revealRef}>
       <Nav active="guide" />
-      <main className="mx-auto max-w-6xl px-6 py-16">
-        <div className="flex flex-col gap-10 lg:flex-row">
+      <main className="mx-auto max-w-5xl px-6 py-16">
+        <section className="reveal">
+          <p className="text-xs uppercase tracking-[0.14em] text-brand">使用指南</p>
+          <h1 className="mt-3 font-serif text-4xl leading-tight text-brand-dark lg:text-5xl">从安装到日常使用</h1>
+          <p className="mt-4 max-w-xl text-base leading-7 text-ink-soft">
+            装好之后，从第一次对话到日常设置，一步步带你走完。
+          </p>
+        </section>
+
+        <div className="mt-14 flex flex-col gap-10 border-t border-line pt-10 lg:flex-row">
           <GuideToc parts={MANUAL_PARTS} />
           <div className="min-w-0 flex-1">
             {MANUAL_PARTS.map((part) => (
               <section key={part.id} id={part.id} className="scroll-mt-24">
-                <h2 className="text-3xl font-semibold tracking-tight text-brand-dark">{part.title}</h2>
-                <p className="mt-3 text-base leading-relaxed text-ink-soft">{part.intro}</p>
+                <h2 className="font-serif text-2xl text-brand-dark">{part.title}</h2>
+                <p className="mt-3 text-base leading-7 text-ink-soft">{part.intro}</p>
                 {part.sections.map((section) => (
                   <ManualSectionView key={section.id} section={section} />
                 ))}
@@ -40,35 +48,40 @@ export default function Guide() {
           </div>
         </div>
 
-        <p className="mt-16 text-center text-xs text-ink-soft">
-          本指南界面以 v{MANUAL_BASELINE_VERSION} 为准 · 截图均为浅色主题，不影响深色模式下的操作
+        <p className="mt-16 text-center text-xs text-ink-muted">
+          本指南内容以当前发布版本为准 · 截图均为浅色主题，不影响深色模式下的操作
         </p>
 
-        <section id="consult" className="reveal mt-16 rounded-[32px] border border-white/80 bg-white/80 px-8 py-10 shadow-[0_20px_44px_rgba(19,40,110,0.08)] backdrop-blur-sm">
+        <section id="consult" className="reveal mt-16 border-t border-line pt-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold text-brand">咨询与反馈</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-brand-dark">需要演示、提需求或提交问题？</h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
-                第一版官网仍保持纯静态，但已经把常见咨询路径整理出来。你可以按“先看场景、再提需求、遇到问题就反馈”的顺序推进。
+              <p className="text-xs uppercase tracking-[0.14em] text-ink-muted">咨询与反馈</p>
+              <h2 className="mt-3 font-serif text-2xl text-brand-dark">需要演示、提需求或提交问题？</h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-ink-soft">
+                按“先看场景、再提需求、遇到问题就反馈”的顺序推进即可。
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap items-center gap-6">
               <CtaButton href="./download.html">前往下载页</CtaButton>
-              <a href={SITE.contactUrl} className="text-link inline-flex items-center text-base">联系我们 →</a>
+              <a
+                href={SITE.contactUrl}
+                className="inline-flex items-center text-base text-ink-soft underline decoration-line underline-offset-4 transition-colors hover:text-brand-dark"
+              >
+                联系我们 →
+              </a>
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 border-t border-line">
             {CONSULT_OPTIONS.map((option) => (
               <a
                 key={option.title}
                 href={option.href}
-                className="surface-card block px-5 py-5 transition-transform duration-300 hover:-translate-y-1"
+                className="grid gap-2 border-b border-line py-4 transition-colors hover:bg-surface-soft md:grid-cols-[160px_1fr_auto] md:items-baseline md:gap-6"
               >
-                <p className="text-base font-semibold text-brand-dark">{option.title}</p>
-                <p className="mt-3 text-sm leading-7 text-ink-soft">{option.desc}</p>
-                <p className="mt-4 text-sm font-medium text-brand">{option.action} →</p>
+                <span className="font-medium text-brand-dark">{option.title}</span>
+                <span className="text-sm leading-6 text-ink-soft">{option.desc}</span>
+                <span className="text-sm text-ink-muted">{option.action} →</span>
               </a>
             ))}
           </div>

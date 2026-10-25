@@ -12,15 +12,13 @@ export default function SectionTitle({
   motto?: string;
 }) {
   return (
-    <div className="mx-auto mb-12 max-w-3xl text-center">
-      <p className="mb-4">
-        <span className="eyebrow-pill tracking-wide">{kicker}</span>
-      </p>
-      <h2 className="text-3xl font-semibold tracking-tight text-brand-dark lg:text-[2rem]">{title}</h2>
+    <div className="mb-10 max-w-2xl border-l-2 border-brand pl-5">
+      <p className="text-xs uppercase tracking-[0.14em] text-brand">{kicker}</p>
+      <h2 className="mt-3 font-serif text-2xl tracking-tight text-brand-dark lg:text-[1.9rem]">{title}</h2>
       {motto && desc ? (
-        <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3">
-          <span className="font-classic text-base tracking-[0.2em] text-brand-dark/70">{motto}</span>
-          <span className="text-sm text-ink-soft">· {desc}</span>
+        <p className="mt-3 flex flex-wrap items-baseline gap-x-3">
+          <span className="font-classic text-base tracking-[0.16em] text-ink-soft">{motto}</span>
+          <span className="text-xs text-ink-muted">· {desc}</span>
         </p>
       ) : motto ? (
         <p className="font-classic mt-3 text-base tracking-[0.2em] text-ink-soft">{motto}</p>

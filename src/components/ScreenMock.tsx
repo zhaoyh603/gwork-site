@@ -16,7 +16,7 @@ interface ShotMeta {
 const REAL_SHOTS: Partial<Record<MockVariant, ShotMeta>> = {
   workspace: {
     src: 'screenshots/workspace.png',
-    heroNote: '项目、工作空间与任务入口集中呈现',
+    heroNote: '项目、工作区与任务入口集中呈现',
     heroPosition: 'center top',
     heroScale: 1.04,
     featurePosition: '34% 18%',
@@ -94,8 +94,8 @@ const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: n
     active: 0,
   },
   assistant: {
-    tabs: ['主助手', '子智能体', '后台任务'],
-    lines: ['帮我完善这份财务报告，按章节拆给子智能体', '已派发 3 个子智能体并行处理，分别负责三大板块', '子智能体运行中，完成后我将统一合稿'],
+    tabs: ['主助手', '子助手', '后台任务'],
+    lines: ['帮我完善这份财务报告，按章节拆给子助手', '已派发 3 个子助手并行处理，分别负责三大板块', '子助手运行中，完成后我将统一合稿'],
     active: 0,
   },
   'model-config': {
@@ -105,7 +105,7 @@ const VARIANTS: Record<MockVariant, { tabs: string[]; lines: string[]; active: n
   },
   skills: {
     tabs: ['SKILLS & MCP', '技能', 'MCP'],
-    lines: ['技能可插拔：公文、文档、检索按需启用', 'MCP 服务全局配置、按工作空间隔离', '新增服务：导入配置文件或手动填写'],
+    lines: ['技能可插拔：公文、文档、检索按需启用', 'MCP 服务全局配置、按工作区隔离', '新增服务：导入配置文件或手动填写'],
     active: 0,
   },
 };
@@ -178,7 +178,7 @@ export default function ScreenMock({
             key={tab}
             className={
               i === v.active
-                ? 'rounded-t-2xl border border-brand-glow border-b-white bg-white px-3 py-2 text-xs font-medium text-brand shadow-[0_-6px_16px_rgba(76,111,255,0.08)]'
+                ? 'rounded-t-2xl border border-brand-glow border-b-white bg-white px-3 py-2 text-xs font-medium text-brand '
                 : 'px-3 py-2 text-xs text-ink-soft'
             }
           >
@@ -193,7 +193,7 @@ export default function ScreenMock({
             key={line}
             className={
               i % 2 === 0
-                ? 'ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-gradient-to-br from-brand via-brand-hover to-brand-dark px-4 py-3 text-xs leading-relaxed text-white shadow-[0_14px_28px_rgba(52,87,244,0.22)]'
+                ? 'ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-brand px-4 py-3 text-xs leading-relaxed text-white'
                 : 'max-w-[85%] rounded-2xl rounded-bl-md border border-white/80 bg-white/95 px-4 py-3 text-xs leading-relaxed text-ink shadow-[0_12px_24px_rgba(17,35,95,0.08)]'
             }
           >

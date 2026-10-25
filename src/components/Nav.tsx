@@ -38,12 +38,12 @@ export default function Nav({ active }: { active: NavActive }) {
     <header className="glass-nav sticky top-0 z-30">
       <nav className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-6 py-3">
         <a href="./index.html" className="group flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/80 bg-white/90 shadow-[0_12px_28px_rgba(76,111,255,0.16)] transition-transform duration-300 group-hover:-translate-y-0.5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white">
             <img src="./icon.png" alt="Gwork 图标" className="h-7 w-7 rounded-xl" />
           </div>
           <div>
             <span className="block text-lg font-semibold tracking-tight text-brand-dark">{SITE.name}</span>
-            <span className="block text-xs text-ink-soft">AI 办公智能工作台</span>
+            <span className="block text-xs text-ink-soft">政企 AI 办公助手</span>
           </div>
         </a>
         <div className="hidden items-center gap-5 lg:flex xl:gap-6">
@@ -54,7 +54,7 @@ export default function Nav({ active }: { active: NavActive }) {
               aria-current={active === link.key ? 'page' : undefined}
               className={
                 active === link.key
-                  ? 'rounded-full bg-brand-soft px-4 py-2 font-medium text-brand shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]'
+                  ? 'rounded-full bg-brand-soft px-4 py-2 font-medium text-brand'
                   : 'text-ink-soft transition-all duration-200 hover:-translate-y-0.5 hover:text-brand-dark'
               }
             >
@@ -69,7 +69,7 @@ export default function Nav({ active }: { active: NavActive }) {
           type="button"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? '关闭导航菜单' : '打开导航菜单'}
-          className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/80 bg-white/85 text-brand-dark shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white text-brand-dark lg:hidden"
           onClick={() => setMenuOpen((value) => !value)}
         >
           <span className="relative block h-4 w-5">
@@ -80,7 +80,7 @@ export default function Nav({ active }: { active: NavActive }) {
         </button>
       </nav>
       <div
-        className={`mx-4 mb-4 overflow-hidden rounded-[28px] border border-white/80 bg-white/90 shadow-[0_20px_44px_rgba(19,40,110,0.12)] backdrop-blur-xl transition-all duration-300 lg:hidden ${menuOpen ? 'pointer-events-auto max-h-96 translate-y-0 opacity-100' : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'}`}
+        className={`mx-4 mb-4 overflow-hidden rounded-xl border border-line bg-paper transition-all duration-300 lg:hidden ${menuOpen ? 'pointer-events-auto max-h-96 translate-y-0 opacity-100' : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'}`}
       >
         <div className="space-y-2 p-4">
           {LINKS.map((link) => (
@@ -90,8 +90,8 @@ export default function Nav({ active }: { active: NavActive }) {
               aria-current={active === link.key ? 'page' : undefined}
               className={
                 active === link.key
-                  ? 'block rounded-2xl bg-brand-soft px-4 py-3 font-medium text-brand'
-                  : 'block rounded-2xl px-4 py-3 text-ink transition-colors hover:bg-surface-soft'
+                  ? 'block rounded-lg bg-brand-soft px-4 py-3 font-medium text-brand'
+                  : 'block rounded-lg px-4 py-3 text-ink transition-colors hover:bg-surface-soft'
               }
               onClick={() => setMenuOpen(false)}
             >

@@ -5,18 +5,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: '#4c6fff',        // 主色：更明亮的品牌蓝
-        'brand-hover': '#3457f4',
-        'brand-dark': '#142b6f', // 标题深蓝
-        'brand-soft': '#eef3ff', // 主色浅底
-        'brand-cyan': '#48c7ff', // 辅助高光
-        'brand-glow': '#d7e5ff', // 玻璃发光描边
-        ink: '#27314d',          // 正文
-        'ink-soft': '#61708f',   // 辅助文字
-        line: '#dbe4ff',         // 边框
-        paper: '#f7f9ff',        // 页面浅底
-        surface: '#ffffff',      // 卡片纯白
-        'surface-soft': '#f3f7ff',
+        // 方向一「公文纸面」：纸白底 + 墨蓝字 + 朱砂点睛（键名沿用，全站类名零改动）
+        brand: '#9C2B24',        // 强调色：朱砂（CTA、链接、选中态）
+        'brand-hover': '#7F211C',
+        'brand-dark': '#1B2A4A', // 标题墨蓝
+        'brand-soft': '#F5E9E6', // 朱砂浅底
+        'brand-cyan': '#B08968', // 旧辅助高光，收敛为暖褐（仅少量使用）
+        'brand-glow': '#E0DACC', // 细线 / 弱描边
+        ink: '#1B2A4A',          // 正文
+        'ink-soft': '#5A6478',   // 辅助文字
+        'ink-muted': '#8B8677',  // 更弱的说明文字
+        line: '#E0DACC',         // 边框
+        paper: '#FBFAF7',        // 页面底（纸白）
+        surface: '#FBFAF7',      // 卡片底（同纸白，靠细线分隔）
+        'surface-soft': '#F4F1EA', // 区块浅底
+      },
+      fontFamily: {
+        // 标题衬线：系统宋体系，零 webfont
+        serif: ['Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', 'serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
       },
     },
   },

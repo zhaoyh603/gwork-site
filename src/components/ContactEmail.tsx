@@ -25,7 +25,7 @@ export default function ContactEmail() {
         <button
           type="button"
           onClick={revealAndCopy}
-          className="btn-shine inline-flex items-center justify-center rounded-2xl px-8 py-4 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_34px_rgba(52,87,244,0.34)] active:translate-y-0 active:shadow-[0_12px_22px_rgba(52,87,244,0.22)]"
+          className="btn-shine inline-flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium text-white transition-opacity duration-200 hover:opacity-90"
         >
           <span className="relative z-10">显示并复制邮箱</span>
         </button>
