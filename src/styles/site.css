@@ -78,6 +78,15 @@ body {
     border-bottom: 1px solid #E0DACC;
   }
 
+  /* 下拉框：去原生箭头，统一自绘箭头（位置固定在内边距内，不探出边框） */
+  .select-plain {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%235A6478' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px 8px;
+  }
+
   .eyebrow-pill {
     border: 1px solid #E0DACC;
     background: transparent;

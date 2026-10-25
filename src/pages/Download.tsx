@@ -146,7 +146,7 @@ export default function Download() {
                   <select
                     value={macVariant}
                     onChange={(e) => setMacVariant(Number(e.target.value))}
-                    className="cursor-pointer rounded-full border border-line bg-white px-4 py-2 text-sm text-ink outline-none focus:border-brand"
+                    className="select-plain cursor-pointer rounded-full border border-line bg-white py-2 pl-4 pr-9 text-sm text-ink outline-none focus:border-brand"
                   >
                     <option value={0}>Apple 芯片（arm64）</option>
                     <option value={1}>Intel 芯片（x64）</option>
