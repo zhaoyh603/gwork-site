@@ -45,6 +45,7 @@ export function matchArtifact(url: string): Omit<ReleaseArtifact, 'url' | 'size'
   if (url.endsWith('-mac-arm64.dmg')) return { name: 'macOS Apple Silicon', platform: 'arm64 DMG', available: true };
   if (url.endsWith('-mac-x64.dmg')) return { name: 'macOS Intel', platform: 'x64 DMG', available: true };
   if (url.endsWith('.exe')) return { name: 'Windows 64 位', platform: 'x64 安装包', available: true };
+  if (url.endsWith('-linux-amd64.deb')) return { name: '国产 Linux', platform: 'x86_64 deb', available: true };
   return null;
 }
 
@@ -57,6 +58,7 @@ export const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
   { name: 'macOS Apple Silicon', platform: 'arm64 DMG', size: '约 459 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-arm64.dmg` },
   { name: 'macOS Intel', platform: 'x64 DMG', size: '约 480 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-mac-x64.dmg` },
   { name: 'Windows 64 位', platform: 'x64 安装包', size: '约 627 MB', available: true, url: `${UPDATE_BASE}/Gwork-0.9.6-x64.exe` },
+  { name: '国产 Linux', platform: 'x86_64 deb', size: '约 270 MB', available: true, url: `${UPDATE_BASE}/Gwork-1.3.0-linux-amd64.deb` },
 ];
 
 /** 解析 CHANGELOG.md（## 版本（日期） + - 条目，标题与条目间允许空行），兼容全/半角括号。 */
