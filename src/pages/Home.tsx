@@ -8,7 +8,7 @@ import { SCENARIOS } from '../data/scenarios';
 import { useReveal } from '../hooks/useReveal';
 import type { CSSProperties } from 'react';
 
-const HERO_HIGHLIGHTS = ['按体例起草公文', '回答带出处', '到点自动执行', '支持 macOS 与 Windows'];
+const HERO_HIGHLIGHTS = ['按体例起草公文', '回答带出处', '到点自动执行', '支持 macOS、Windows 与国产 Linux'];
 const HERO_FLOATING_CARD = {
   title: '通知初稿',
   value: '已按公文体例起草',

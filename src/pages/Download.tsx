@@ -50,7 +50,7 @@ function DownloadButton({
 }
 
 const REQUIREMENTS: Array<[string, string]> = [
-  ['操作系统', 'macOS 12 及以上 / Windows 10 及以上'],
+  ['操作系统', 'macOS 12 及以上 / Windows 10 及以上 / 统信 UOS 20、银河麒麟 V10 SP1（x86_64）'],
   ['内存', '8 GB 及以上'],
   ['硬盘空间', '2 GB 可用空间'],
 ];
@@ -118,7 +118,7 @@ export default function Download() {
             <span className="eyebrow-pill tracking-wide">获取 Gwork</span>
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-brand-dark lg:text-5xl">下载 Gwork {version}</h1>
-          <p className="mt-4 text-base text-ink-soft">本地安装，免费使用，支持 macOS 与 Windows。</p>
+          <p className="mt-4 text-base text-ink-soft">本地安装，免费使用，支持 macOS、Windows 与国产 Linux。</p>
         </div>
 
         <div className="reveal mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-3">
