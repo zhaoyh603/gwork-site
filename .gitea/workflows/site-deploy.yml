@@ -1,0 +1,62 @@
+# 官网发版流水线（Forgejo Actions，Issue #12）
+# 只在 Forgejo 跑：放 .gitea/workflows/ 与 GitHub Pages 的 .github/workflows/deploy.yml 隔离，
+# 影子仓（GitHub Actions）不读本目录，不会误执行 ECS 部署。
+# runner = t638 宿主直执行（runner-linux-01，gwork 主仓 build-linux 同款）；宿主需已有
+# ecs-user@39.98.121.250 免密（rsync 部署用，缺失时探测步骤明确报错）。
+name: Site Deploy
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: 构建 + 部署 ECS + 冒烟
+    runs-on: linux
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # 排查用（t638 宿主工具链；pnpm 版本须与 packageManager 一致，偏差时人审处理）
+      - name: 工具链版本
+        run: |
+          node -v
+          pnpm -v
+          rsync --version | head -1
+
+      # lockfile 的 tarball URL 绑定本地 npmmirror 镜像，registry 必须对齐（同 GitHub 版 deploy.yml）
+      - name: 对齐 registry
+        run: pnpm config set registry https://registry.npmmirror.com
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 构建前校验（type-check + lint）
+        run: |
+          pnpm type-check
+          pnpm lint
+
+      - name: 构建
+        run: pnpm build
+
+      # 发布凭证前置：宿主免密缺失时此处即失败，错误信息直接给出补配指引（不走进 rsync 半途而废）
+      - name: ECS 免密探测
+        run: ssh -o BatchMode=yes -o ConnectTimeout=10 ecs-user@39.98.121.250 'echo ok'
+
+      - name: 部署到 ECS
+        run: rsync -az --delete -e "ssh -o BatchMode=yes" dist/ ecs-user@39.98.121.250:/var/www/gwork-site/
+
+      # 冒烟：index 200 + 线上 download 页引用的 bundle 与本地产物同名（部署内容一致性断言）
+      - name: 线上冒烟
+        run: |
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -m 15 https://www.gworkai.cn/)
+          [ "$code" = "200" ] || { echo "::error::index 不可达：$code"; exit 1; }
+          local_bundle=$(ls dist/assets/download-*.js | xargs -n1 basename)
+          remote_bundle=$(curl -sS -m 15 https://www.gworkai.cn/download.html | grep -o 'assets/download-[a-zA-Z0-9_-]*\.js' | head -1 | xargs -n1 basename)
+          echo "本地 $local_bundle / 线上 $remote_bundle"
+          [ "$local_bundle" = "$remote_bundle" ] || { echo "::error::线上 bundle 与构建产物不一致"; exit 1; }
+          echo "冒烟通过"
