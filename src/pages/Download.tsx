@@ -34,22 +34,39 @@ function detectMacVariantIndex(): number {
   return uaData?.architecture === 'x86' ? 1 : 0;
 }
 
+/**
+ * Linux 默认变体：Chromium 系可识别 ARM 访问者，默认给 ARM64；其余默认 x86_64（主流架构）。
+ * Safari/Firefox 无该字段时同样落到 x86_64。
+ */
+function detectLinuxVariantIndex(): number {
+  const uaData = (navigator as Navigator & { userAgentData?: { architecture?: string } }).userAgentData;
+  return uaData?.architecture === 'arm' ? 1 : 0;
+}
+
 const PLATFORM_LABEL: Record<PlatformKey, string> = { mac: 'macOS', win: 'Windows', linux: 'Linux' };
 const PLATFORM_META: Record<PlatformKey, string> = {
   mac: 'macOS 12 及以上',
   win: 'Windows 10 及以上',
-  linux: 'Ubuntu 20.04+ / Debian 10+ / 统信 UOS 20 / 银河麒麟 V10 · 仅 x86_64 架构',
+  linux: 'Ubuntu 20.04+ / Debian 10+ / 统信 UOS 20 / 银河麒麟 V10 SP1',
 };
 
+/** Linux 两个下载变体的展示名与 artifact 命名（releases.ts matchArtifact 同名互指）。 */
+const LINUX_VARIANTS = [
+  { name: 'Linux', label: 'x86_64（Intel、AMD、海光、兆芯）' },
+  { name: 'Linux ARM64', label: 'ARM64（飞腾、鲲鹏）' },
+] as const;
+
+const LINUX_CPU_HINT = '支持 x86_64（Intel、AMD、海光、兆芯）与 ARM64（飞腾、鲲鹏）；龙芯暂不支持';
+
 const REQUIREMENTS: Array<[string, string]> = [
-  ['操作系统', 'macOS 12 及以上 / Windows 10 及以上 / Ubuntu 20.04+、Debian 10+、统信 UOS 20、银河麒麟 V10（x86_64）'],
+  ['操作系统', 'macOS 12 及以上 / Windows 10 及以上 / Ubuntu 20.04+、Debian 10+、统信 UOS 20、银河麒麟 V10 SP1'],
   ['内存', '8 GB 及以上'],
   ['硬盘空间', '2 GB 可用空间'],
-  ['Linux CPU', '支持 x86_64 架构：Intel、AMD、海光、兆芯；暂不支持飞腾、鲲鹏（ARM）与龙芯'],
+  ['Linux CPU', 'x86_64：Intel、AMD、海光、兆芯；ARM64：飞腾、鲲鹏；龙芯暂不支持'],
 ];
 
 /**
- * 拉取更新服务器版本清单（mac + Windows + Linux）与更新记录（CHANGELOG.md）。
+ * 拉取更新服务器版本清单（mac + Windows + Linux 双架构）与更新记录（CHANGELOG.md）。
  * Linux 清单可能晚于客户端上线（首版补传），404 视为空清单不阻断其他平台。
  */
 function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[]; changelog: ReleaseLogItem[] } | null {
@@ -65,15 +82,17 @@ function useDynamicRelease(): { version: string; artifacts: ReleaseArtifact[]; c
       fetch(`${UPDATE_BASE}/latest-mac.yml`).then((r) => r.text()),
       fetch(`${UPDATE_BASE}/latest.yml`).then((r) => r.text()),
       fetch(`${UPDATE_BASE}/latest-linux.yml`).then((r) => (r.ok ? r.text() : '')).catch(() => ''),
+      fetch(`${UPDATE_BASE}/latest-linux-arm64.yml`).then((r) => (r.ok ? r.text() : '')).catch(() => ''),
       fetch(`${UPDATE_BASE}/CHANGELOG.md`).then((r) => r.text()),
     ])
-      .then(([macYml, winYml, linuxYml, changelogRaw]) => {
+      .then(([macYml, winYml, linuxYml, linuxArmYml, changelogRaw]) => {
         if (cancelled) return;
         const mac = parseReleaseManifest(macYml);
         const win = parseReleaseManifest(winYml);
         const linux = parseReleaseManifest(linuxYml);
+        const linuxArm = parseReleaseManifest(linuxArmYml);
         const artifacts: ReleaseArtifact[] = [];
-        for (const file of [...mac.files, ...win.files, ...linux.files]) {
+        for (const file of [...mac.files, ...win.files, ...linux.files, ...linuxArm.files]) {
           const meta = matchArtifact(file.url);
           if (meta) artifacts.push({ ...meta, size: formatSize(file.size), url: `${UPDATE_BASE}/${file.url}` });
         }
@@ -104,9 +123,13 @@ export default function Download() {
 
   const platform = detectPlatform();
   const [macVariant, setMacVariant] = useState(() => detectMacVariantIndex());
+  const [linuxVariant, setLinuxVariant] = useState(() => detectLinuxVariantIndex());
 
   const byName = (name: string): ReleaseArtifact | undefined => artifacts.find((a) => a.name === name);
   const macVariants = [byName('macOS Apple Silicon'), byName('macOS Intel')].filter(
+    (a): a is ReleaseArtifact => Boolean(a),
+  );
+  const linuxVariants = LINUX_VARIANTS.map((v) => byName(v.name)).filter(
     (a): a is ReleaseArtifact => Boolean(a),
   );
   const primary =
@@ -114,7 +137,9 @@ export default function Download() {
       ? macVariants[macVariant] ?? macVariants[0]
       : platform === 'win'
         ? byName('Windows 64 位')
-        : byName('Linux');
+        : platform === 'linux'
+          ? linuxVariants[linuxVariant] ?? linuxVariants[0]
+          : undefined;
   const others = (['mac', 'win', 'linux'] as PlatformKey[]).filter((p) => p !== platform);
 
   return (
@@ -138,7 +163,7 @@ export default function Download() {
               <p className="font-serif text-2xl text-brand-dark">{PLATFORM_LABEL[platform]}</p>
               <p className="mt-1 text-sm text-ink-soft">{PLATFORM_META[platform]}</p>
               {platform === 'linux' ? (
-                <p className="mt-1 text-xs text-ink-muted">CPU 需为 x86_64：Intel、AMD、海光、兆芯；飞腾、鲲鹏（ARM）与龙芯暂不支持</p>
+                <p className="mt-1 text-xs text-ink-muted">{LINUX_CPU_HINT}</p>
               ) : null}
               {platform === 'mac' && macVariants.length > 1 ? (
                 <label className="mt-4 block">
@@ -150,6 +175,20 @@ export default function Download() {
                   >
                     <option value={0}>Apple 芯片（arm64）</option>
                     <option value={1}>Intel 芯片（x64）</option>
+                  </select>
+                </label>
+              ) : null}
+              {platform === 'linux' && linuxVariants.length > 1 ? (
+                <label className="mt-4 block">
+                  <span className="sr-only">选择 CPU 架构</span>
+                  <select
+                    value={linuxVariant}
+                    onChange={(e) => setLinuxVariant(Number(e.target.value))}
+                    className="select-plain cursor-pointer rounded-full border border-line bg-white py-2 pl-4 pr-9 text-sm text-ink outline-none focus:border-brand"
+                  >
+                    {LINUX_VARIANTS.map((v, i) => (
+                      <option key={v.name} value={i}>{v.label}</option>
+                    ))}
                   </select>
                 </label>
               ) : null}
@@ -178,19 +217,30 @@ export default function Download() {
           <div className="mt-3 border-t border-line">
             {others.map((p) => {
               const artifact =
-                p === 'win' ? byName('Windows 64 位') : p === 'mac' ? macVariants[0] : byName('Linux');
+                p === 'win' ? byName('Windows 64 位') : p === 'mac' ? macVariants[0] : linuxVariants[0];
               return (
                 <div key={p} className="flex flex-wrap items-center justify-between gap-3 border-b border-line py-4">
                   <div>
                     <p className="font-medium text-brand-dark">{PLATFORM_LABEL[p]}</p>
                     <p className="mt-0.5 text-sm text-ink-soft">{PLATFORM_META[p]}</p>
                     {p === 'linux' ? (
-                      <p className="mt-0.5 text-xs text-ink-muted">CPU 需为 x86_64：Intel、AMD、海光、兆芯；飞腾、鲲鹏（ARM）与龙芯暂不支持</p>
+                      <p className="mt-0.5 text-xs text-ink-muted">{LINUX_CPU_HINT}</p>
                     ) : null}
                   </div>
-                  {artifact ? (
+                  {p === 'linux' ? (
+                    <div className="flex flex-wrap items-center gap-x-4">
+                      {LINUX_VARIANTS.map((v, i) => {
+                        const a = linuxVariants[i];
+                        return a ? (
+                          <a key={v.name} href={a.url} className="text-link text-sm">
+                            下载 deb（{v.name === 'Linux' ? 'x86_64' : 'ARM64'}）→
+                          </a>
+                        ) : null;
+                      })}
+                    </div>
+                  ) : artifact ? (
                     <a href={artifact.url} className="text-link text-sm">
-                      下载 {p === 'linux' ? 'deb' : PLATFORM_LABEL[p]} →
+                      下载 {PLATFORM_LABEL[p]} →
                     </a>
                   ) : (
                     <span className="text-sm text-ink-muted">暂未发布</span>
