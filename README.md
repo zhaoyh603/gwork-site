@@ -30,7 +30,9 @@ pnpm build && pnpm exec vite preview
 
 ## 部署
 
-推送到 `main` 分支后，GitHub Actions（`.github/workflows/deploy.yml`）自动构建并部署到 GitHub Pages，无需手动操作。也可在 Actions 页面手动触发 `workflow_dispatch`。
+**主站发版（2026-11-04 起）**：推送 `main` 后 Forgejo Actions（`.gitea/workflows/site-deploy.yml`）自动构建并部署到 ECS 39.98.121.250（www.gworkai.cn 站点目录 `/var/www/gwork-site`），含线上冒烟断言，合并即上线。手动回退：`pnpm build && rsync -az --delete dist/ ecs-user@39.98.121.250:/var/www/gwork-site/`。
+
+**GitHub Pages 影子站**：影子同步驱动 GitHub Actions（`.github/workflows/deploy.yml`）构建部署 Pages，延迟 ≤30 分钟，仅作展示备用，非主链路。
 
 ## 页面结构
 
