@@ -26,7 +26,7 @@ jobs:
         run: |
           node -v
           pnpm -v
-          rsync --version | head -1
+          rsync --version
 
       # lockfile 的 tarball URL 绑定本地 npmmirror 镜像，registry 必须对齐（同 GitHub 版 deploy.yml）
       - name: 对齐 registry
@@ -43,12 +43,10 @@ jobs:
       - name: 构建
         run: pnpm build
 
-      # 发布凭证前置：宿主免密缺失时此处即失败，错误信息直接给出补配指引（不走进 rsync 半途而废）
-      - name: ECS 免密探测
-        run: ssh -o BatchMode=yes -o ConnectTimeout=10 ecs-user@39.98.121.250 'echo ok'
-
-      - name: 部署到 ECS
-        run: rsync -az --delete -e "ssh -o BatchMode=yes" dist/ ecs-user@39.98.121.250:/var/www/gwork-site/
+      # 部署：runner-site-01 固定在 ECS 本机（runner User=ecs-user，对站点目录有属主写权限），
+      # 本地 rsync 即部署，无 ssh 链路。若 runner 迁回跨机形态，此处需改回 ssh + 免密探测。
+      - name: 部署到站点目录
+        run: rsync -az --delete dist/ /var/www/gwork-site/
 
       # 冒烟：index 200 + 线上 download 页引用的 bundle 与本地产物同名（部署内容一致性断言）
       - name: 线上冒烟
